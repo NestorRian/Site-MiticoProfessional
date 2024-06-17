@@ -9,6 +9,25 @@ header {
     height: 120px;
 }
 
+.title-principal {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+.title-principal::after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 4px; /* Espessura da borda */
+    width: 50%; /* Metade da largura do elemento */
+    background-color: #FFD700; /* Cor da borda */
+    position: absolute;
+    bottom: -10px; /* Ajuste conforme necessário */
+    left: 0;
+    right: 200px;
+  }
+
 .cabecalho ul {
     display: flex;
     gap: 4rem;
