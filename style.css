@@ -11,17 +11,21 @@ header {
 
 .cabecalho ul {
     display: flex;
-    gap: 5rem;
+    gap: 4rem;
     list-style: none;
     margin-left: 500px;
     margin-top: 60px;
 
 }
 
+.cabecalho li {
+    margin-right: ;
+}
+
 .cabecalho a {
     text-decoration: none;
     color: #fff;
-    font-size: 21px;    
+    font-size: 21px;
 }
 
 .logomarca {
