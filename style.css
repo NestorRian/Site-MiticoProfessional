@@ -37,9 +37,6 @@ header {
 
 }
 
-.cabecalho li {
-    margin-right: ;
-}
 
 .cabecalho a {
     text-decoration: none;
@@ -55,6 +52,20 @@ header {
 .img-sobre {
     width: 700px;
     height: 700px;
+}
+
+.txt-principal {
+    text-align: center;
+}
+
+
+.img-title {
+    width: 500px;
+    height: 100px;
+    margin-bottom: 30px;
+    margin-left: 180px;
+    display: flex;
+    
 }
 
 .resumo-sobre {
