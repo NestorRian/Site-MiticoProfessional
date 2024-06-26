@@ -6,27 +6,9 @@
 header {
     display: flex;
     background-color: black;
-    height: 120px;
+    height: 150px;
 }
 
-.title-principal {
-    text-align: center;
-    position: relative;
-    display: inline-block;
-}
-
-.title-principal::after {
-    content: '';
-    display: block;
-    margin: auto;
-    height: 4px; /* Espessura da borda */
-    width: 50%; /* Metade da largura do elemento */
-    background-color: #FFD700; /* Cor da borda */
-    position: absolute;
-    bottom: -10px; /* Ajuste conforme necessário */
-    left: 0;
-    right: 200px;
-  }
 
 .cabecalho ul {
     display: flex;
@@ -46,42 +28,77 @@ header {
 
 .logomarca {
     width: 300px;
-    height: 120px;
-}
-
-.img-sobre {
-    width: 700px;
-    height: 700px;
-}
-
-.txt-principal {
-    text-align: center;
+    height: 150px;
 }
 
 
-.img-title {
-    width: 500px;
-    height: 100px;
-    margin-bottom: 30px;
-    margin-left: 180px;
+.slider {
+    margin: 0 auto;
+    width: 100%;
+    height: 820px;
+    overflow: hidden;
+}
+
+.slides {
+    width: 400%;
+    height: 800px;
     display: flex;
-    
 }
 
-.resumo-sobre {
+.slides input {
+    display: none;
+}
+
+.slide {
+    width: 25%;
+    position: relative;
+}
+
+.slide img {
+    width: 99vw;
+    background-size: cover;
+}
+
+.manual-navigation {
+    position: absolute;
+    width: 100%;
+    margin-top: -40px;
     display: flex;
-    align-items: center;
-    font-size: 25px;
+    justify-content: center;
 }
 
-.resumo-sobre p {
-    width: 600px;
-    margin-top: 20px;
-    margin-left: 50px;
+.manual-btn {
+    border: 2px solid #fff;
+    padding: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
 }
 
-.resumo-sobre span {
-    color: #FFD700;
-    font-size: 50px;
-    font-family: Impact, fantasy;
+.manual-btn:not(:last-child) {
+    margin-right: 40px;
 }
+
+.manual-btn:hover {
+    background-color: #ffffff;
+}
+
+#radio1:checked ~ .first {
+    margin-left: 0;
+}
+
+#radio2:checked ~ .first {
+    margin-left: -25%;
+}
+#radio3:checked ~ .first {
+    margin-left: -50%;
+}
+
+#radio4:checked ~ .first {
+    margin-left: -75%;
+}
+
+#radio5:checked ~ .first {
+    margin-left: -100%;
+}
+
