@@ -151,6 +151,7 @@ header {
 #sobre img {
     width: 600px;
     height: 600px;
+    border-radius: 20px;
 }
 
 .secao-sobre {
