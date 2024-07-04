@@ -168,3 +168,30 @@ header {
     margin-left: 50px;
 }
 
+.txt-inicial {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.txt-inicial p {
+    font-size: 25px;
+    margin-top: 15px;
+    border-bottom: 3px solid #00000011;
+    padding-bottom: 20px;
+}
+
+.txt-inicial h3 {
+    font-size: 30px;
+}
+
+.produtos {
+    text-align: center;
+    display: flex;
+    margin: 50px;
+    gap: 1rem;
+}
+
+.produtos img{
+    width: 250px;
+    height: 250px;
+}
