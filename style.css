@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 header {
@@ -25,6 +26,14 @@ header {
     color: #fff;
     font-size: 21px;
 }
+
+.cabecalho a:hover {
+    background: linear-gradient(90deg, #fcfcfb, #a9af51);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
 
 .logomarca {
     width: 300px;
@@ -86,22 +95,23 @@ header {
     background-color: #ffffff;
 }
 
-#radio1:checked ~ .first {
+#radio1:checked~.first {
     margin-left: 0;
 }
 
-#radio2:checked ~ .first {
+#radio2:checked~.first {
     margin-left: -25%;
 }
-#radio3:checked ~ .first {
+
+#radio3:checked~.first {
     margin-left: -50%;
 }
 
-#radio4:checked ~ .first {
+#radio4:checked~.first {
     margin-left: -75%;
 }
 
-#radio5:checked ~ .first {
+#radio5:checked~.first {
     margin-left: -100%;
 }
 
@@ -113,7 +123,7 @@ header {
     transition: 1s;
 }
 
-.navigation-auto{
+.navigation-auto {
     position: absolute;
     width: 99vw;
     margin-top: 660px;
@@ -125,20 +135,23 @@ header {
     margin-right: 40px;
 }
 
-#radio1:checked ~ .navigation-auto .auto-btn1 {
+#radio1:checked~.navigation-auto .auto-btn1 {
     background-color: #fff;
 }
 
-#radio2:checked ~ .navigation-auto .auto-btn2 {
+#radio2:checked~.navigation-auto .auto-btn2 {
     background-color: #fff;
 }
-#radio3:checked ~ .navigation-auto .auto-btn3 {
+
+#radio3:checked~.navigation-auto .auto-btn3 {
     background-color: #fff;
 }
-#radio4:checked ~ .navigation-auto .auto-btn4 {
+
+#radio4:checked~.navigation-auto .auto-btn4 {
     background-color: #fff;
 }
-#radio5:checked ~ .navigation-auto .auto-btn5 {
+
+#radio5:checked~.navigation-auto .auto-btn5 {
     background-color: #fff;
 }
 
@@ -150,7 +163,7 @@ header {
 
 #sobre img {
     width: 600px;
-    height: 800px;
+    height: 600px;
     border-radius: 20px;
 }
 
@@ -190,17 +203,18 @@ header {
     flex-wrap: nowrap;
     gap: 20px;
     padding: 20px;
-  }
-  
-  /* Seção de produtos */
-  #products {
-    flex: 1; /* Ocupa o espaço restante */
+}
+
+/* Seção de produtos */
+#products {
+    flex: 1;
+    /* Ocupa o espaço restante */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
-  }
-  
-  .product-card {
+}
+
+.product-card {
     background-color: #fff;
     border: 1px solid #dddddd;
     border-radius: 8px;
@@ -208,61 +222,67 @@ header {
     padding: 20px;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+}
 
-  .product-card:hover {
-    transform: translateY(-5px) scale(1.03); /* Eleva o card levemente */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra */
-    background-color: #f5f5f5; /* Altera levemente a cor do fundo */
-  }
-  
-  .product-card img {
+.product-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    /* Eleva o card levemente */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    /* Aumenta a sombra */
+    background-color: #f5f5f5;
+    /* Altera levemente a cor do fundo */
+}
+
+.product-card img {
     max-width: 100%;
     border-radius: 8px;
-  }
+}
 
-  .button-card {
+.button-card {
     background: #007bff;
     color: white;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ddd;
-  }
+}
 
-  .preco {
+.preco {
     color: #06a806;
     font-size: 20px;
-  }
-  
-  /* Seção de carrinho */
-  #cart {
-    width: 300px; /* Largura fixa do carrinho */
+}
+
+/* Seção de carrinho */
+#cart {
+    width: 300px;
+    /* Largura fixa do carrinho */
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Fixa o carrinho ao rolar a página */
-    top: 20px; /* Distância do topo ao rolar */
-  }
-  
-  #cart h2 {
+    position: sticky;
+    /* Fixa o carrinho ao rolar a página */
+    top: 20px;
+    /* Distância do topo ao rolar */
+}
+
+#cart h2 {
     margin-bottom: 10px;
-  }
-  
-  #cart-items {
+}
+
+#cart-items {
     list-style: none;
     padding: 0;
     margin: 0 0 20px;
-  }
-  
+}
 
-  #cart-items li {
+
+#cart-items li {
     margin-bottom: 10px;
     font-size: 1em;
-  }
-  
-  #cart button {
+}
+
+#cart button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -270,19 +290,19 @@ header {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-  }
+}
 
-  .buttonEnd button {
+.buttonEnd button {
     color: #007bff;
-  }
-  
-  
-  #cart button:hover {
+}
+
+
+#cart button:hover {
     background-color: #0056b3;
-  }
-  
-  #cart {
-  transition: top 0.3s ease-in-out;
+}
+
+#cart {
+    transition: top 0.3s ease-in-out;
 }
 
 #cartNotification {
@@ -296,4 +316,97 @@ header {
     border-radius: 5px;
     font-size: 16px;
     z-index: 1000;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    margin: 20px;
+}
+
+.footer-section h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #FFD700;
+    /* Cor temática */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 10px 0;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #FFD700;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    color: #222;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-social a:hover {
+    background-color: #fff;
+    color: #010005;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.imagem-produto {
+    cursor: zoom-in;
+}
+
+.luneta {
+    display: none;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.luneta img {
+
+    width: 800px;
+    /* O dobro do tamanho da imagem original */
+    transition: all 0.1s ease-out;
 }
