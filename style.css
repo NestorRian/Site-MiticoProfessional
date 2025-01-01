@@ -397,16 +397,3 @@ footer {
 .imagem-produto {
     cursor: zoom-in;
 }
-
-.luneta {
-    display: none;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.luneta img {
-
-    width: 800px;
-    /* O dobro do tamanho da imagem original */
-    transition: all 0.1s ease-out;
-}
