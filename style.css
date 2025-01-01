@@ -150,7 +150,7 @@ header {
 
 #sobre img {
     width: 600px;
-    height: 600px;
+    height: 800px;
     border-radius: 20px;
 }
 
@@ -202,7 +202,7 @@ header {
   
   .product-card {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -219,6 +219,19 @@ header {
   .product-card img {
     max-width: 100%;
     border-radius: 8px;
+  }
+
+  .button-card {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .preco {
+    color: #06a806;
+    font-size: 20px;
   }
   
   /* Seção de carrinho */
@@ -243,9 +256,10 @@ header {
     margin: 0 0 20px;
   }
   
+
   #cart-items li {
     margin-bottom: 10px;
-    font-size: 0.9em;
+    font-size: 1em;
   }
   
   #cart button {
@@ -257,8 +271,29 @@ header {
     cursor: pointer;
     width: 100%;
   }
+
+  .buttonEnd button {
+    color: #007bff;
+  }
+  
   
   #cart button:hover {
     background-color: #0056b3;
   }
   
+  #cart {
+  transition: top 0.3s ease-in-out;
+}
+
+#cartNotification {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 20px;
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+}
