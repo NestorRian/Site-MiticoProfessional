@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mítico Professional</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <title>Mítico Professional</title>
+
 </head>
 
 <body>
@@ -18,7 +19,7 @@
         <ul>
           <li><a href="#inicio">INICIO</a></li>
           <li><a href="#sobre">QUEM SOMOS</a></li>
-          <li><a href="#catalogo">CATÁLOGO</a></li>
+          <li><a href="#produtos">CATÁLOGO</a></li>
           <li><a href="#contato">CONTATO</a></li>
         </ul>
       </nav>
@@ -90,7 +91,7 @@
 
     </section>
 
-
+    <section id="produtos">
     <div id="container">
       <!-- Seção de Produtos -->
       <div id="products">
@@ -196,65 +197,75 @@
       </div>
       <div id="cartNotification">Produto adicionado ao carrinho!</div>
 
-      <!-- Seção de Carrinho -->
-      <div id="cart">
-        <h2>&#128722;Carrinho</h2>
-        <ul id="cart-items">
-          <!-- Itens do carrinho serão adicionados aqui -->
-        </ul>
-        <p><strong>Total:</strong> <span id="cart-total">R$ 0,00</span></p>
-        <button onclick="finalizePurchase()">Finalizar Compra</button>
-      </div>
-    </div>
+     <!-- Ícone do Carrinho -->
+     <div id="cart-icon" onclick="toggleCart()">
+      🛒
+  </div>
+
+  <!-- Carrinho (inicialmente oculto) -->
+  <div id="cart" class="hidden">
+      <h2>🛒 Carrinho</h2>
+      <ul id="cart-items">
+          <!-- Itens do carrinho aparecem aqui -->
+      </ul>
+      <p><strong>Total:</strong> <span id="cart-total">R$ 0,00</span></p>
+      <button onclick="finalizePurchase()">Finalizar Compra</button>
+  </div>
+
+  <!-- Alerta de Adição -->
+  <div id="cart-notification" class="hidden">
+      Produto adicionado ao carrinho com sucesso!
+  </div>
+    </div> 
+  </section>
 
 
   </main>
 
-  <footer id="contato">
+  <footer id="contato" class="footer">
     <div class="footer-container">
-      <!-- Sobre a Loja -->
-      <div class="footer-section">
-        <h4>Sobre Nós</h4>
-        <p>Descubra a beleza com nossa linha de cosméticos premium. Produtos de alta qualidade para cuidar de você!</p>
-      </div>
-
-      <!-- Links Úteis -->
-      <div class="footer-section">
-        <h4>Links Úteis</h4>
-        <ul>
-          <li><a href="/sobre">Sobre Nós</a></li>
-          <li><a href="/produtos">Produtos</a></li>
-          <li><a href="/contato">Fale Conosco</a></li>
-          <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
-        </ul>
-      </div>
-
-      <!-- Contato -->
-      <div class="footer-section">
-        <h4>Contato</h4>
-        <ul>
-          <li>Telefone: (11) 1234-5678</li>
-          <li>Email: contato@cosmeticos.com</li>
-          <li>Endereço: Rua Beleza, 123, SP</li>
-        </ul>
-      </div>
-
-      <!-- Redes Sociais -->
-      <div class="footer-section">
-        <h4>Siga-nos</h4>
-        <div class="footer-social">
-          <a href="#" title="Facebook">&#xf09a;</a> <!-- Icone FontAwesome -->
-          <a href="#" title="Instagram">&#xf16d;</a> <!-- Icone FontAwesome -->
-          <a href="#" title="Twitter">&#xf099;</a> <!-- Icone FontAwesome -->
-          <a href="#" title="Pinterest">&#xf0d2;</a> <!-- Icone FontAwesome -->
+        <!-- Logo e Descrição -->
+        <div class="footer-section">
+            <img src="assets/logo-txt.png" alt="Logo da Loja" class="footer-logo">
+            <p class="footer-description">
+                Sua loja de cosméticos de confiança, trazendo os melhores produtos para realçar sua beleza natural.
+            </p>
         </div>
-      </div>
+
+        <!-- Links Rápidos -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Links Rápidos</h3>
+            <ul class="footer-links">
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+        </div>
+
+        <!-- Contato -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Contato</h3>
+            <p class="footer-contact">📍 Rua Exemplo, 123 - São Paulo, SP</p>
+            <p class="footer-contact">📞 (11) 98765-4321</p>
+            <p class="footer-contact">📧 contato@lojacosmeticos.com.br</p>
+        </div>
+
+        <!-- Redes Sociais -->
+        <div class="footer-section">
+            <h3 class="footer-heading">Siga-nos</h3>
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </div>
 
+    <!-- Direitos Autorais -->
     <div class="footer-bottom">
-      <p>&copy; 2025 Loja de Cosméticos. Todos os direitos reservados.</p>
+        <p>© 2025 Loja de Cosméticos. Todos os direitos reservados.</p>
     </div>
-  </footer>
+</footer>
+
 </body>
 
 </html>
