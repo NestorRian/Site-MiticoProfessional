@@ -251,63 +251,59 @@ header {
     font-size: 20px;
 }
 
-/* Ícone do Carrinho */
-#cart-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #e63946;
-    color: #fff;
-    font-size: 1.5em;
-    padding: 10px 15px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: transform 0.2s ease;
-}
-
-#cart-icon:hover {
-    transform: scale(1.1);
-}
-
-/* Carrinho Oculto */
-.hidden {
-    display: none;
-}
-
-/* Alerta de Adição */
-#cart-notification {
-    position: fixed;
+/* Seção de carrinho */
+#cart {
+    width: 300px;
+    /* Largura fixa do carrinho */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    /* Fixa o carrinho ao rolar a página */
     top: 20px;
-    right: 20px;
-    background-color: #4caf50;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Distância do topo ao rolar */
+}
+
+#cart h2 {
+    margin-bottom: 10px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+
+#cart-items li {
+    margin-bottom: 10px;
     font-size: 1em;
-    z-index: 1000;
-    animation: fadeOut 2.5s forwards;
 }
 
-/* Animação de Desaparecimento */
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        display: none;
-    }
+#cart button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
 }
 
+.buttonEnd button {
+    color: #007bff;
+}
+
+
+#cart button:hover {
+    background-color: #0056b3;
+}
+
+#cart {
+    transition: top 0.3s ease-in-out;
+}
 
 #cartNotification {
     display: none;
@@ -420,7 +416,7 @@ header {
 }
 
 
-/* Responsividade produtos*/
+/* Responsividade */
 @media (max-width: 768px) {
     #container {
         flex-direction: column;
