@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Remove a rolagem horizontal */
+    box-sizing: border-box;
 }
 
 header {
@@ -196,6 +198,17 @@ header {
 .txt-inicial h3 {
     font-size: 30px;
 }
+
+#container, #products, #cart {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img, .product-card {
+    max-width: 100%; /* Garante que as imagens e cartões respeitem a largura do contêiner */
+    height: auto;    /* Mantém a proporção */
+}
+
 
 /* Estilo principal do layout */
 #container {
@@ -418,6 +431,11 @@ header {
 
 /* Responsividade */
 @media (max-width: 768px) {
+
+    #products, #cart {
+        padding: 0 10px; /* Adiciona espaço interno sem causar estouro */
+    }
+
     #container {
         flex-direction: column;
         align-items: center;
