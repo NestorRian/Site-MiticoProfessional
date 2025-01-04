@@ -433,7 +433,7 @@ img, .product-card {
 @media (max-width: 768px) {
 
     #products, #cart {
-        padding: 0 10px; /* Adiciona espaço interno sem causar estouro */
+        padding: 0 10px; /* Adiciona espaço interno sem causar estouro*/
     }
 
     #container {
