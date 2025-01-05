@@ -527,6 +527,8 @@ img, .product-card {
 
     .slides {
       width: 500%; /* Certifique-se de que os slides ocupem a largura certa */
+      max-height: 300px;
+      overflow: none;
     }
   
     .slide img {
