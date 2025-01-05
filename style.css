@@ -10,18 +10,32 @@ header {
     display: flex;
     background-color: black;
     height: 150px;
+    justify-content: space-between; /* Logomarca à esquerda e menu à direita */
+    align-items: center;
+    padding: 0 20px;
 }
-
 
 .cabecalho ul {
-    display: flex;
-    gap: 4rem;
-    list-style: none;
-    margin-left: 500px;
-    margin-top: 60px;
-
+    display: flex; /* Por padrão, o menu será flexível em telas maiores */
+    flex-direction: row; /* Alinha os itens na horizontal */
+    gap: 2rem;
+    margin-left: 0;
+    margin-top: 0;
+    margin: 30px;
+    width: auto; /* Largura automática para ocupar o espaço necessário */
+    text-align: center;
+    top: 0; /* Alinha ao topo */
+    left: 0; /* Alinha à esquerda */
+    background-color: black;
+    padding: 20px 0;
+    z-index: 9999; /* Garante que o menu fique acima dos outros elementos */
 }
 
+/* Quando o menu estiver aberto */
+.cabecalho ul.show {
+    left: 0; /* O menu se move para a posição 0 (visível) */
+    display: flex; /* Exibe o menu */
+}
 
 .cabecalho a {
     text-decoration: none;
@@ -35,25 +49,45 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
-
-
 .logomarca {
     width: 300px;
     height: 150px;
 }
 
+/* Estilo para o ícone do menu (hambúrguer) */
+.menu-toggle {
+    display: none; /* Oculta o ícone por padrão */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+}
+
+/* As barras do ícone de hambúrguer */
+.bar {
+    width: 100%;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* Quando o menu estiver aberto */
+.cabecalho ul.show {
+    display: flex; /* Exibe o menu */
+}
 
 .slider {
     margin: 0 auto;
     width: 100%;
     height: 700px;
-    overflow: hidden;
 }
 
 .slides {
-    width: 400%;
+    width: 500%;
     height: 700px;
     display: flex;
+    overflow-x: none;
 }
 
 .slides input {
@@ -71,6 +105,9 @@ header {
     width: 99vw;
     height: 700px;
     background-size: cover;
+    overflow-x: none; 
+
+
 }
 
 .manual-navigation {
@@ -428,6 +465,145 @@ img, .product-card {
     margin: 0;
 }
 
+/* Responsividade header 768px */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row; /* Mantém as coisas alinhadas horizontalmente */
+        height: auto;
+        justify-content: space-between;
+    }
+
+    .cabecalho ul {
+        display: none; /* O menu é ocultado em telas pequenas */
+        flex-direction: column;
+        gap: 2rem;
+        margin-left: 0;
+        margin-top: 0;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 70px; /* Coloca o menu abaixo do cabeçalho */
+        background-color: black;
+        padding: 20px 0;
+        position: absolute;
+    }
+
+    .menu-toggle {
+        display: flex; /* Exibe o ícone do menu */
+    }
+
+    .logomarca {
+        width: 200px;
+        height: auto;
+    }
+
+    .cabecalho a {
+        font-size: 18px;
+    }
+}
+
+/* Responsividade para telas muito pequenas (como celulares) */
+@media (max-width: 480px) {
+    .logomarca {
+        width: 150px;
+    }
+
+    .cabecalho a {
+        font-size: 16px;
+    }
+}
+
+/* Quando o menu estiver aberto */
+.cabecalho ul.show {
+    display: flex; /* Exibe o menu */
+}
+
+/* Responsividade slide */
+@media (max-width: 768px) {
+
+    .slider {
+        height: 300px;
+    }
+
+    .slides {
+      width: 500%; /* Certifique-se de que os slides ocupem a largura certa */
+    }
+  
+    .slide img {
+      max-width: 100%; /* Garante que as imagens sejam responsivas */
+      height: 300px;
+    }
+  
+    .manual-btn {
+      width: 8px;
+      height: 8px; /* Botões menores em dispositivos móveis */
+      display: none;
+    }
+
+    
+  }
+  
+  @media (max-width: 480px) {
+    .manual-navigation {
+      bottom: 10px; /* Ajusta a posição dos botões de navegação */
+      height: 459px;
+    }
+
+    .navigation-auto {
+        position: absolute;
+        width: 99vw;
+        margin-top: 280px;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+  
+    .manual-btn {
+      width: 6px;
+      height: 6px; /* Botões ainda menores para telas muito pequenas */
+      display: none;
+    }
+  }
+
+/* Responsividade para secão sobre*/
+@media (max-width: 768px) {
+    #sobre {
+      flex-direction: column; /* Coloca os elementos em uma única coluna */
+      text-align: center; /* Centraliza o texto */
+    }
+  
+    #sobre img {
+      max-width: 100%;
+      margin-bottom: 20px;
+      
+    }
+  
+    .secao-sobre h1 {
+      font-size: 1.5rem; /* Reduz o tamanho do título */
+      margin: 0;
+    }
+
+  
+    .secao-sobre p {
+        
+      margin: auto;
+      width: auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .secao-sobre h1 {
+      font-size: 25px; /* Ajuste adicional para telas muito pequenas */
+    }
+  
+    .secao-sobre p {
+      font-size: 19px; /* Ajuste para o texto ficar legível */
+    }
+  
+    #sobre {
+      padding: 10px; /* Reduz o espaçamento para economizar espaço */
+    }
+  }
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -492,3 +668,4 @@ img, .product-card {
         margin: 0 auto 15px;
     }
 }
+

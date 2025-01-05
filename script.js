@@ -14,6 +14,31 @@ function nextImage() {
     document.getElementById("radio" + count).checked = true;
 }
 
+// Obtenha o ícone de menu e o menu
+const menuToggle = document.getElementById('menu-toggle');
+const menu = document.querySelector('.cabecalho ul');
+const menuItems = document.querySelectorAll('.cabecalho a');
+
+// Função para abrir/fechar o menu
+menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show'); // Alterna a classe 'show' para exibir/ocultar o menu
+});
+
+// Fecha o menu se o usuário clicar fora dele
+window.addEventListener('click', (event) => {
+    if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+        menu.classList.remove('show'); // Remove a classe 'show' se o clique for fora do menu
+    }
+});
+
+// Fecha o menu ao clicar em uma opção
+menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+        menu.classList.remove('show'); // Remove a classe 'show' ao clicar em um item de menu
+    });
+});
+
+
 const cart = [];
 const cartItemsList = document.getElementById('cart-items');
 const cartTotal = document.getElementById('cart-total');
