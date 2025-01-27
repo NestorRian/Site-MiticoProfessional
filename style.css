@@ -283,10 +283,19 @@ img, .product-card {
     /* Altera levemente a cor do fundo */
 }
 
+.product-card h3 {
+    margin-top: 10px;
+}
+
 .product-card img {
     max-width: 100%;
     border-radius: 8px;
 }
+
+.product-card p {
+    margin-top: 10px;
+}
+
 
 .button-card {
     background: #007bff;
@@ -299,6 +308,7 @@ img, .product-card {
 .preco {
     color: #06a806;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 /* Seção de carrinho */
@@ -434,6 +444,12 @@ img, .product-card {
 .footer-contact {
     line-height: 1.6;
     margin: 30px 0px -10px 0px;
+}
+
+.footer-contact a {
+    text-decoration: none;
+    color: #dddddd;
+
 }
 
 /* Redes Sociais */
@@ -634,11 +650,13 @@ img, .product-card {
     }
 
     .product-card h3 {
-        font-size: 1em;
+        font-size: 25px;
+        font-weight: bold;
     }
 
     .product-card p {
-        font-size: 0.9em;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 
     .button-card {
