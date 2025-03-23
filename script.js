@@ -96,6 +96,21 @@ function finalizePurchase() {
     window.open(whatsappUrl, '_blank');
 }
 
+function filterProducts() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let products = document.querySelectorAll(".product-card");
+
+    products.forEach(product => {
+        let title = product.querySelector("h3").innerText.toLowerCase();
+        if (title.includes(input)) {
+            product.style.display = "block"; // Mostra os produtos que correspondem
+        } else {
+            product.style.display = "none"; // Oculta os produtos que não correspondem
+        }
+    });
+}
+
+
 // Notificação ao adicionar ao carrinho
 const buttons = document.querySelectorAll(".addAlert");
 
