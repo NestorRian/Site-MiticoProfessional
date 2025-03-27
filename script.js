@@ -18,6 +18,19 @@ const menuToggle = document.getElementById('menu-toggle');
 const menu = document.querySelector('.cabecalho ul');
 const menuItems = document.querySelectorAll('.cabecalho a');
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    let whatsappButton = document.querySelector(".whatsapp-float");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 100) {
+            whatsappButton.style.display = "block";
+        } else {
+            whatsappButton.style.display = "none";
+        }
+    });
+});
+
 // Função para abrir/fechar o menu
 menuToggle.addEventListener('click', () => {
     menu.classList.toggle('show');
