@@ -1,547 +1,576 @@
-<!DOCTYPE html>
-<html lang="en">
-
+﻿<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-  <title>Mítico Professional</title>
-
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Mitico Profissional | Alta Performance em Cosmeticos</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X75B51JE38"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-X75B51JE38");
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Material+Icons&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#C5A059",
+            "background-light": "#1A1A1A",
+            "background-dark": "#0A0A0A",
+          },
+          fontFamily: {
+            display: ["Playfair Display", "serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
 </head>
-
-<body>
-  <main>
-    <header>
-      <img class="logomarca" src="./assets/logo-marca.jpg" alt="">
-      <nav class="cabecalho">
-        <ul>
-          <li><a href="#inicio">INICIO</a></li>
-          <li><a href="#sobre">QUEM SOMOS</a></li>
-          <li><a href="#produtos">CATÁLOGO</a></li>
-          <li><a href="#contato">CONTATO</a></li>
-        </ul>
-        <!-- Ícone de menu hambúrguer -->
-        <div class="menu-toggle" id="menu-toggle">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+<body class="bg-background-light dark:bg-background-dark text-gray-200 font-sans selection:bg-primary selection:text-black">
+  <nav class="fixed w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex-shrink-0 flex items-center">
+          <img alt="Mitico Profissional Logo" class="h-14 w-auto" src="assets/logo-marca.jpg" />
         </div>
-      </nav>
-    </header>
-    <div class="slider">
-      <div class="slides">
-        <!--Radio Buttons-->
-        <input type="radio" name="radio-btn" id="radio1">
-        <input type="radio" name="radio-btn" id="radio2">
-        <input type="radio" name="radio-btn" id="radio3">
-        <input type="radio" name="radio-btn" id="radio4">
-        <input type="radio" name="radio-btn" id="radio5">
-        <!--Fim-->
-        <!--Slide images-->
-        <div class="slide first">
-          <img src="./assets/Introdução-Site.jpg" alt="introdução">
+        <div class="main-nav space-x-8 items-center">
+          <a class="text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#home">Home</a>
+          <a class="text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#produtos">Produtos</a>
+          <a class="text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#historia">Nossa Historia</a>
+          <a class="bg-primary text-black px-6 py-2 rounded-full font-bold uppercase tracking-tighter text-sm hover:brightness-110 transition-all" href="#contato">Comprar Agora</a>
         </div>
-        <div class="slide">
-          <img src="./assets/Ativador-de-cachos-mítico.jpg" alt="introdução">
-        </div>
-        <div class="slide">
-          <img src="./assets/Kit-Babosa-mítico.jpg" alt="introdução">
-        </div>
-        <div class="slide">
-          <img src="./assets/O-KIT-CAFÉ-MÍTICO.jpg" alt="introdução">
-        </div>
-        <div class="slide">
-          <img src="./assets/O-KIT-BANANA-E-MEL.png" alt="introdução">
-        </div>
-        <!--Fim-->
-        <!--Navigation-auto-->
-        <div class="navigation-auto">
-          <div class="auto-btn1"></div>
-          <div class="auto-btn2"></div>
-          <div class="auto-btn3"></div>
-          <div class="auto-btn4"></div>
-          <div class="auto-btn5"></div>
+        <div class="flex items-center gap-3">
+          <button id="admin-open" class="login-btn" type="button">Login</button>
+          <button id="cart-toggle" class="cart-toggle-btn" type="button" aria-label="Abrir carrinho">
+            <span class="material-icons">shopping_bag</span>
+            <span id="cart-count" class="cart-badge hidden">0</span>
+          </button>
+          <span id="cart-total-mini" class="cart-total-mini hidden">R$ 0,00</span>
+          <button id="mobile-menu-toggle" class="text-primary md:hidden" type="button" aria-label="Abrir menu">
+            <span class="material-icons">menu</span>
+          </button>
         </div>
       </div>
-      <div class="manual-navigation">
-        <label for="radio1" class="manual-btn"></label>
-        <label for="radio2" class="manual-btn"></label>
-        <label for="radio3" class="manual-btn"></label>
-        <label for="radio4" class="manual-btn"></label>
-        <label for="radio5" class="manual-btn"></label>
+      <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-3">
+        <a class="block text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#home">Home</a>
+        <a class="block text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#produtos">Produtos</a>
+        <a class="block text-gray-300 hover:text-primary transition-colors uppercase tracking-widest text-xs font-semibold" href="#historia">Nossa Historia</a>
+        <a class="block bg-primary text-black px-5 py-2 rounded-full font-bold uppercase tracking-tighter text-sm hover:brightness-110 transition-all" href="#contato">Comprar Agora</a>
       </div>
-
     </div>
-    <section id="sobre">
-      <img src="./assets/img-secao-sobre.jpg" alt="Imagem ilustrativa">
-      <div class="secao-sobre">
-        <h1>MÍTICO PROFISSIONAL</h1>
-        <br><br>
-        <p class="txt-sobre">
-          A <STRONG>Mítico Profissional</STRONG> é uma empresa de cosméticos profissionais que oferece produtos de alta
-          tecnologia e qualidade, proporcionando todo tratamento necessário para os cabelos.
-          Acreditamos que o poder da beleza e a autoestima são forças transformadoras do mundo que nos cerca.
-          <br><br>
-          Nosso trabalho junto aos cabeleireiros, temos o compromisso de investir, pesquisar e desenvolver produtos de
-          alta performance para que nossos clientes possam ter em mãos produtos modernos e inovadores, que proporcionem
-          resultados superiores não somente em beleza mas principalmente em saúde.
-          <br><br>
-          Para alcançar nosso propósito, utilizamos matérias primas de última geração e os ativos mais puros existentes,
-          testados e aprovados em nossos laboratórios.
-          Fiel a princípios elevados e a rígidos processos de produção, criamos produtos que levam o mais excelente
-          conceito em qualidade e tecnologia, que agora estão cada vez mais próximos de você
-        </p>
+  </nav>
+
+  <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="home">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background-light dark:to-background-dark"></div>
+      <img alt="Cosmeticos Mitico" class="w-full h-full object-cover opacity-30" src="assets/img-secao-sobre.jpg" loading="eager" decoding="async" />
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight">
+        Cosmeticos profissionais de <br />
+        <span class="gold-text-gradient">alta performance</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Tecnologia avancada para resultados extraordinarios. A marca preferida dos maiores especialistas em beleza.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a class="bg-primary text-black px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform w-full sm:w-auto" href="#produtos">
+          Ver Produtos
+        </a>
+        <a class="border-2 border-primary text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-primary hover:text-black transition-all w-full sm:w-auto flex items-center justify-center gap-2" href="https://wa.me/5511970618002" target="_blank" rel="noopener">
+          <span class="material-icons text-xl">chat</span>
+          Falar com Especialista
+        </a>
       </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <span class="material-icons text-primary opacity-50">keyboard_double_arrow_down</span>
+    </div>
+  </section>
 
-    </section>
+  <section class="py-24 bg-background-light dark:bg-background-dark border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+        <div class="p-8 border-gold rounded-2xl hover-gold transition-all duration-300">
+          <span class="material-icons text-primary text-5xl mb-4">science</span>
+          <h3 class="font-display text-2xl text-white mb-3">Tecnologia de Ponta</h3>
+          <p class="text-gray-400">Formulas exclusivas desenvolvidas em laboratorios de alta tecnologia para maxima absorcao capilar.</p>
+        </div>
+        <div class="p-8 border-gold rounded-2xl hover-gold transition-all duration-300">
+          <span class="material-icons text-primary text-5xl mb-4">star</span>
+          <h3 class="font-display text-2xl text-white mb-3">Qualidade Premium</h3>
+          <p class="text-gray-400">Ingredientes selecionados para garantir brilho intenso e restauracao profunda desde a primeira aplicacao.</p>
+        </div>
+        <div class="p-8 border-gold rounded-2xl hover-gold transition-all duration-300">
+          <span class="material-icons text-primary text-5xl mb-4">auto_awesome</span>
+          <h3 class="font-display text-2xl text-white mb-3">Resultado de Salao</h3>
+          <p class="text-gray-400">Desempenho superior que atende as exigencias dos profissionais mais renomados do mercado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <input type="text" id="searchBar" placeholder="Pesquisar produtos..." onkeyup="filterProducts()">
+  <section class="py-24 px-4 bg-background-light dark:bg-background-dark" id="produtos">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-4xl md:text-5xl text-white mb-4">Nossos Produtos</h2>
+        <div class="h-1 w-24 gold-gradient mx-auto mb-6"></div>
+        <p class="text-gray-400">Descubra a linha completa para transformacao capilar</p>
+      </div>
+      <div class="product-controls">
+        <input type="text" id="searchBar" placeholder="Pesquisar produtos..." />
+      </div>
+      <div id="category-filters" class="category-filters" aria-label="Filtros de categoria"></div>
+      <div class="catalog-layout">
+        <div id="products" class="product-grid">
+          <p class="text-gray-500">Carregando produtos...</p>
+        </div>
+      </div>
+      <div id="pagination" class="pagination" aria-label="Paginacao de produtos"></div>
+    </div>
+  </section>
+  
 
-    <a href="https://wa.me/5511970618002" class="whatsapp-float" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-
-    </a>
-
-
-
-    <section id="produtos">
-      <div id="container">
-        <!-- Seção de Produtos -->
-        <div id="products">
-          <div class="product-card">
-            <img src="assets/kit-progressiva-argila-branca2.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Progressiva Argila Branca 1l</h3>
-            <p><br>Progressiva Argila Branca da Mítico Profissional
-              É um Alisamento redução de volume que permite uma alteração progressiva capaz de alisar os cabelos
-              proporcionando cabelos sem frizz e com muito brilho
-              Com a Escova Argila Branca Mítico Profissional, o couro cabeludo terá maisfortalecimento,
-              acelerando o crescimento dos fios, proporcionando um alisamento perfeito e uniforme
-            </p>
-            <p class="preco"><strong>R$ 94,99</strong></p>
-            <button cla select-produto="Kit Progressiva Argila Branca 1l" select-preco="94.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Kit Progressiva Argila Branca 1l', 94.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Progressiva Max Liss Orgânica 1litro.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Progressiva Max Liss Orgânica 1L</h3>
-            <p><br>A progressiva Max Liss Orgânica (sem formol) é a melhor e a mais vendida do momento. Tenha o liso
-              perfeito, brilhante e com saúde.
-              Resultado Garantido. Entrega Rápida. Produto Original.
-              Faça como centenas de outros clientes e adquira já a sua!
-              Progressiva Max Liss Orgânica
-              Sem cheiro, sem ardência, sem fumaça, cabelos 100% liso, 0% formol e compatível com qualquer química,
-              indicado para todos tipos de cabelo e especifica para loiro pois ajuda a matizar e neutralizar o ton
-              amarelado dos fios sem danificar o cabelo.
-            </p>
-            <p class="preco"><strong>R$ 94,99</strong></p>
-            <button cla select-produto="Progressiva Max Liss Orgânica 1L" select-preco="94.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Kit Progressiva Argila Branca 1l', 94.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Selagem Efeito 3D Óleos Especiais 1litro.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Selagem Efeito 3D Óleos Especiais 1L</h3>
-            <p><br>A Selagem Mitico é um tratamento com óleos especiais e com aplicação de calor promove a restruturação
-              dos fios, diminuindo o frizz e deixando o cabelo mais macio, hidratado com menos volume e com efeito de
-              liso natural.
-            </p>
-            <p class="preco"><strong>R$ 74,99</strong></p>
-            <button cla select-produto="Selagem Efeito 3D Óleos Especiais 1L" select-preco="74.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Progressiva Argila Branca 1l', 74.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Botox Líquido 3D 1litro.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Botox Líquido 3D 1L</h3>
-            <p>O Botox Líquido da Mítico Profissional possui potente ação anti-frizz, redução do volume e efeito
-              nutri-selante. Ele age impedindo a oxidação dos radicais livres, sela as cutículas, promove brilho intenso
-              e intensificação da cor, deixando seus fios lisos e saudáveis. </p>
-            <p class="preco"><strong>R$ 74,99</strong></p>
-            <button select-produto="Botox Líquido 3D 1L" select-preco="74.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Babosa 1L', 74.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Btox-cafe.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Botox de Café 1kg</h3>
-            <p>O Botox de Café da Mítico Profissional é um tratamento redutor de volume com a proposta de hidratar e
-              recuperar os nutrientes dos fios de cabelo. Proporcionando brilho e sedosidade aos cabelos, também garante
-              mechas mais saudáveis e eliminação do frizz. A linha faz uma combinação poderosa do extrato de café com o
-              óleo de argan - um excelente antioxidante natural - proporcionando uma hidratação intensa com vitamina E,
-              que fortalece e protege os fios de cabelo.
-            </p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button select-produto="Produto" select-preco="54.99" style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Produto 2', 54.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/botox-organico.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Botox Orgânico</h3>
-            <p>Botox Max Redux Mitico é um especifico tratamento de recuperação e restauração profunda da fibra capilar,
-              age onde o cabelo mais precisa de reparo, elimina pontas duplas, reduz o volume deixa o cabelo com efeito
-              liso, sedoso cheio de brilho e alinhado.</p>
-            <p class="preco"><strong>R$ 64,99</strong></p>
-            <button select-produto="Botox Orgânico" select-preco="64.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Babosa 1L', 64.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Botox Blond Orgânico 1kg.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Botox Blond Orgânico 1kg</h3>
-            <p>Desenvolvido para restaurar, alinhar, disciplinar, selar, reduzir o volume, controlar o frizz dar brilho.
-              Além disso, hidrata, nutre e dá maciez. Deixando os fios alinhados, proporciona mais facilidade ao
-              desembaraçar. </p>
-            <p class="preco"><strong>R$ 67,99</strong></p>
-            <button select-produto="Botox Blond Orgânico 1kg" select-preco="67.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Babosa 1L', 67.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Mockup-do-produto-Linha-Mandioca.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo 1l e Máscara 1kg Mandioca</h3>
-            <p>Shampoo de Mandioca: Faz a limpeza suave dos cabelos, mantendo a hidratação natural. Promove o
-              crescimento através do extrato de mandioca e da vitamina E. Os fios ficam macios e limpinhos, independente
-              do seu tipo de cabelo! <br> <br>
-              Máscara de Mandioca: Para cabelos secos e danificados, a fórmula da Máscara contém vitaminas, minerais e
-              proteínas hidratantes para dar um tratamento profundo aos seus fios de dentro para fora!</p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button cla select-produto="Kit Shampoo 1l e Máscara 1kg Mandioca" select-preco="54.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Shampoo 1l e Máscara 1kg Mandioca', 54.99)">Adicionar
-              ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Shampoo-Mandioca.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Shampoo de Mandioca 1L</h3>
-            <p>O Shampoo de Mandioca Mítico Profissional faz a limpeza dos fios através do extrato de mandioca e
-              Vitamina E. Proporciona maciez e limpeza podendo ser usado por todos tipos de cabelos diariamente.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="Shampoo de Mandioca 1L" select-preco="24.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Mandioca 1L', 24.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/mascara-de-mandioca.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Máscara 1kg Hidratação Mandioca</h3>
-            <p>Máscara de Mandioca Mítico Profissional é indicada para o tratamento de cabelos secos e danificados pelo
-              dia a dia. Sua fórmula contém vitaminas, proteínas e minerais que hidrata profundamente os fios desde
-              dentro para fora, garantindo brilho e Maciez ao cabelo.</p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button cla select-produto="Máscara 1kg Hidratação Mandioca" select-preco="29.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Máscara 1kg Hidratação Mandioca', 29.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/kit-shampoo-mascara-condicionador-mandioca.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo, Condicionador e Máscara Mandioca 300ml</h3>
-            <p>O Shampoo Hidratante da Mítico faz a limpeza dos cabelos suavemente, mantendo a hidratação natural do
-              cabelo, e promovendo crescimento dos fios. Proporciona maciez aos fios, podendo ser usado diariamente.
-              O Condicionador estimula o crescimento saudável dos cabelos, contendo vitaminas e extrato de mandioca, que
-              promovem o crescimento capilar e o fortalecimento contra a queda.
-              A Máscara trata dos cabelos secos e danificados pelo dia-a-dia. Sua fórmula tem proteínas e minerais que
-              hidratam profundamente os cabelos de dentro para fora.
-            </p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button cla select-produto="Kit Shampoo, Condicionador e Máscara Banana e Mel 300ml" select-preco="29.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Shampoo, Condicionador e Máscara Banana e Mel 300ml', 29.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/bb-crem.jpg" alt="Produto 1" class="imagem-produto">
-            <h3>BBCREAM 300ml</h3>
-            <p>Fluído termoativo reconstrutor, indicado para cabelos lisos e pós-progressiva. A fórmula contém Rosa
-              Mosqueta, Aloe e Vera, e óleo de Ojon garantindo um liso duradouro aos fios. Tem 12 benefícios totais:
-              Toque de Seda, brilho, hidratação, ação anti frizz, força, proteção térmica, proteção UV, antiquebra,
-              maleabilidade, proteção de cor, maciez e blindagem contra umidade.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="BBCREAM 300ml" select-preco="24.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('BBCREAM 300ml', 24.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/leave-in.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Leave - in 300ml</h3>
-            <p>O Leave-in da Mítico é indicado para todos os tipos de cabelo. Sua fórmula contém óleo de coco, Pantenol,
-              vitamina E, e blend de aminoácidos. Hidrata e protege os fios de agressões térmicas, reduzindo também o
-              frizz. Dá um efeito liso duradouro, nutre e deixa um brilho espetacular.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="Leave - in 300ml" select-preco="24.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Leave - in 300ml', 24.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/ativador-cachos.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Ativador de Cachos 300g</h3>
-            <p>O ativador de cachos indicado para cabelos cacheados, ondulados e crespos que procuram mais definição e
-              hidratação dos fios. O ativador estimula a formação de caixas perfeitos, realça o brilho natural dos
-              cabelos e ajuda na hidratação dos fios.</p>
-            <p class="preco"><strong>R$ 26,50</strong></p>
-            <button select-produto="Ativador de Cachos 300g" select-preco="26.50" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Ativador de Cachos 300g', 26.50)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Power-queratina.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Power Queratina 500ml</h3>
-            <p>É um poderoso S.O.S para cabelos elástico, emborrachado e maltratado por química.
-              Sua fórmula contém Queratina.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="Power Queratina 500ml" select-preco="24,99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Power Queratina 500ml', 24,99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Banho-crist.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Banho de Cristalização 1kg</h3>
-            <p>O Banho de Cristalização da Mítico é um poderoso tratamento que reduz e sela as cutículas do cabelo. Sua
-              base branca é indicada para todos os tipos de cabelos. Sua fórmula é rica em óleo de Argan, óleo de
-              Macadâmia e um Blend de aminoácidos, que juntos tem o poder de alinhar os fios, reconstruir, fortalecer e
-              desenvolver o brilho natural aos cabelos. Indicado para intercalar entre o uso de três meses de pausa do
-              ativo redutor.</p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button select-produto="Banho de Cristalização 1kg" select-preco="54.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Banho de Cristalização 1kg', 54.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Shampoo-babosa1L.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Shampoo de Babosa 1L</h3>
-            <p>O Shampoo de Babosa da Mítico Profissional limpa suavemente sem danificar e deixando uma sensação leve.
-              Sua fórmula contém Babosa, Aloe Vera e Óleo de Rícino que hidratam o cabelo da raiz às pontas, restauram e
-              protegem o cabelo para promover uma fibra mais forte e saudável.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="Shampoo de Babosa 1L" select-preco="24.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Babosa 1L', 24.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Shampoo-Banana-Mel .jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Shampoo de Banana e Mel 1L</h3>
-            <p>O Shampoo de Banana e Mel Mítico Profissional é indicado para todos tipos de cabelos extremamente
-              danificados e submetidos a processos químicos, limpa suavemente e auxilia na reparação dos danos. Sua
-              fórmula contém vitamina E, B e Queratina que proporciona maciez, revitalização profunda e fios fortes.</p>
-            <p class="preco"><strong>R$ 24,99</strong></p>
-            <button select-produto="Shampoo de Banana e Mel 1L" select-preco="24.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Shampoo de Banana e Mel 1L', 24.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/linha babosa.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo 1l e Máscara 1kg Babosa</h3>
-            <p>Shampoo de Babosa: Com uma limpeza suave, não danifica o cabelo, deixando uma sensação de leveza. A
-              Babosa na fórmula, junto com Aloe e Vera e Óleo de Ricino, hidratam, restauram e protegem seu cabelo. Isso
-              constrói uma fibra mais forte e saudável do que nunca. <br> <br>
-              Máscara de Babosa: Para os cabelos opacos e ásperos sem quase ou nenhuma elasticidade. Usa a fórmula de
-              babosa para hidratar e proteger ainda mais seus cabelos, promovendo o tratamento dos sonhos!
-            </p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button select-produto="Kit Shampoo 1l e Máscara 1kg Babosa" select-preco="54.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Kit Shampoo 1l e Máscara 1kg Babosa', 54.99)">Adicionar
-              ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Kit Cachos 300ml.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Cachos 300ml</h3>
-            <p>O shampoo efetua uma suave limpeza sem agredir os fios, sendo recomendado para cabelos do ondulado ao
-              crespo.
-              Contém óleo de coco, elastina e manteiga de Karité, fortalecendo as fibras capilares.
-              O ativador de cachos indicado para cabelos cacheados, ondulados e crespos que procuram mais definição e
-              hidratação dos fios. O ativador estimula a formação de cachos perfeitos, realça o brilho natural dos
-              cabelos e ajuda na hidratação dos fios.
-              O Condicionador estimula o crescimento saudável, junto com óleo de macadâmia e argan, condiciona e previne
-              a queda do cabelo.
-            </p>
-            <p class="preco"><strong>R$ 34,99</strong></p>
-            <button select-produto="Kit Cachos 300ml" select-preco="34.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Kit Cachos 300ml', 34.99)">Adicionar
-              ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Mockup-do-produto-Linha-Banana-e-mel.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo 1l e Máscara 1kg Banana e Mel</h3>
-            <p>Shampoo Banana e Mel: Indicado para cabelos submetidos a processos químicos e danificados ao extremo. Sua
-              fórmula contém Vitamina E, B e Queratina, dando maciez e revitalização profunda. <br> <br> Máscara Banana
-              E Mel: Repõe a massa, maciez e resistência dos fios, além de hidratar perfeitamente seu cabelo.
-            </p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button select-produto="Kit Shampoo 1l e Máscara 1kg Banana e Mel" select-preco="54.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Shampoo 1l e Máscara 1kg Banana e Mel', 54.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/mascara-babosa-1kg.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Máscara de Babosa 1kg</h3>
-            <p>A Máscara de Babosa Mítico Profissional é indicada para cabelos opacos, ásperos e sem elasticidade. Sua
-              fórmula contém Babosa, Aloe Vera e Óleo de Rícino que aumentam a umidade hidratando eo cabelo da raiz às
-              pontas, controlando o frizz, restaurando e protegendo o cabelo para promover uma fibra mais forte e
-              saudável.</p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button select-produto="Máscara de Babosa 1kg" select-preco="29.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Máscara de Babosa 1kg', 29.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/Reconstrução de 3 Minutos 1kg.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Reconstrução de 3 Minutos 1kg</h3>
-            <p>Desenvolvida especialmente para cabelos ressecados. Hidrata e nutre sem pesar o cabelo. Dá maciez e reduz
-              o frizz.
-              Sua fórmula contém 13 aminoácidos que são semelhantes à queratina da fibra capilar, reestruturando os fios
-              em um cabelo brilhoso e macio. </p>
-            <p class="preco"><strong>R$ 54,99</strong></p>
-            <button select-produto="Reconstrução de 3 Minutos 1kg" select-preco="54.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Reconstrução de 3 Minutos 1kg', 54.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/mascara-banana-mel-1kg.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Máscara de Banana e Mel 1kg </h3>
-            <p>A Máscara de Banana e Mel da Mítico Profissional É indicada para cabelos extremamente danificados e
-              submetidos a processos químicos, auxilia na reparação dos danos e reconstroem a cutícula capilar. Sua
-              fórmula contém Vitamina E, B e Queratina que proporciona resistência, reposição de massa, maciez e fios
-              fortes.</p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button select-produto="Máscara de Banana e Mel 1kg" select-preco="29.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Máscara de Banana e Mel 1kg', 29.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/po-descolorante.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Pó Descolorante Max Blound 500g</h3>
-            <p>Pó Descolorante Max Blond Mítico Profissional, Clareia até 11 tons de forma uniforme e sem danificar o
-              cabelo.
-              Modo de Uso: Antes de usar, faça os testes de toque e de mechas. Utilize luvas. Em um recipiente não
-              metálico, misture o pó ao oxidante (água oxigenada) conforme o resultado desejado - 40 volumes - na
-              proporção de 1 para 1, até 1 para 2. Misture com auxílio de uma espátula não metálica ou pincel, até obter
-              uma consistência homogênea. Aplicar sobre os cabelos secos e não lavados, iniciando na nuca ou nas partes
-              mais escuras. Após o tempo de ação, lave com água em abundância até retirar totalmente o produto. Proceda
-              a seguir com lavagem de Shampoo e Condicionador. Produto de uso profissional.</p>
-            <p class="preco"><strong>R$ 64,99</strong></p>
-            <button cla select-produto="Pó Descolorante Max Blound" select-preco="64.99" style="cursor: pointer;"
-              class="button-card addAlert" onclick="addToCart('Pó Descolorante Max Blound', 64.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/kit-shampoo-mascara-condicionador.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo, Condicionador e Máscara Banana e Mel 300ml</h3>
-            <p>O Shampoo de Banana e Mel é indicado para cabelos danificados e submetidos a processos químicos, limpando
-              suavemente e auxilia na reparação dos danos. Sua fórmula contém Vitamina E, B e Queratina, que mantém o
-              cabelo macio e forte.
-              O Condicionador estimula o crescimento saudável dos cabelos. Dá nutrição ao cabelo da raiz às pontas,
-              dando maciez e acelerando o crescimento enquanto revitaliza os fios.
-              A Máscara é poderosa no processo de reconstruir seu cabelo, começando das cutículas. A resistência,
-              reposição de massa e fortalecimento são os principais benefícios.</p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button cla select-produto="Kit Shampoo, Condicionador e Máscara Banana e Mel 300ml" select-preco="29.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Shampoo, Condicionador e Máscara Banana e Mel 300ml', 29.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/mascara-hidratação-mandioca..jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Máscara de Hidratação Mandioca 2kg</h3>
-            <p>A Máscara de Mandioca da Mítico Profissional trata os cabelos secos e danificados pelo dia-a-dia. Sua
-              fórmula tem proteínas e minerais que hidratam profundamente os cabelos de dentro para fora.</p>
-            <p class="preco"><strong>R$ 64,99</strong></p>
-            <button cla select-produto="Máscara de Hidratação Mandioca 2kg" select-preco="64.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Máscara de Hidratação Mandioca 2kg', 64.99)">Adicionar ao
-              Carrinho</button>
-          </div>
-          <div class="product-card">
-            <img src="assets/kit-shampoo-mascara-condicionador-babosa.jpg" alt="Produto 2" class="imagem-produto">
-            <h3>Kit Shampoo, Condicionador e Máscara Babosa 300ml</h3>
-            <p>O Shampoo de Babosa limpa sem danificar, com suavidez. Babosa, Aloe e Vera e Óleo de Ricino são parte da
-              fórmula, hidratando o cabelo e restaurando a proteção do mesmo.
-              O Condicionador estimula o crescimento do cabelo de maneira saudável, além de acelerar o processo e
-              prevenir a queda capilar.
-              A Máscara é indicada para cabelos opacos, ásperos e sem elasticidade, ela trata dando umidade aos fios,
-              controlando o frizz e fortalecendo a fibra capilar.
-            </p>
-            <p class="preco"><strong>R$ 29,99</strong></p>
-            <button cla select-produto="Kit Shampoo, Condicionador e Máscara Babosa 300ml" select-preco="29.99"
-              style="cursor: pointer;" class="button-card addAlert"
-              onclick="addToCart('Kit Shampoo, Condicionador e Máscara Babosa 300ml', 29.99)">Adicionar ao
-              Carrinho</button>
+  <section class="py-24 bg-neutral-900/30" id="historia">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="relative order-2 lg:order-1">
+          <div class="absolute -top-4 -left-4 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+          <div class="relative z-10 border-2 border-primary p-2 rounded-2xl">
+            <img alt="Nossa historia" class="rounded-xl transition-all duration-700" src="assets/img-jorge.jpeg" loading="lazy" decoding="async" />
           </div>
         </div>
-        <div id="cartNotification">
-          <p>Produto adicionado ao carrinho!</p>
+        <div class="order-1 lg:order-2">
+          <h2 class="font-display text-4xl md:text-5xl text-white mb-8">Nossa Historia</h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6">
+            A <span class="text-primary font-bold">Mitico Profissional</span> oferece cosmeticos profissionais de alta tecnologia e qualidade,
+            proporcionando todo tratamento necessario para os cabelos. Acreditamos que o poder da beleza e a autoestima
+            sao forcas transformadoras do mundo que nos cerca.
+          </p>
+          <p class="text-gray-300 text-lg leading-relaxed mb-8">
+            Nosso compromisso e investir em pesquisa e desenvolvimento para entregar produtos modernos e inovadores,
+            com resultados superiores em beleza e saude. Utilizamos materias-primas de ultima geracao e ativos puros,
+            testados e aprovados em laboratorio.
+          </p>
+          <div class="flex flex-wrap gap-8">
+            <div>
+              <span class="block text-primary text-3xl font-bold">10+</span>
+              <span class="text-xs uppercase tracking-widest text-gray-500">Anos de Mercado</span>
+            </div>
+            <div>
+              <span class="block text-primary text-3xl font-bold">50k+</span>
+              <span class="text-xs uppercase tracking-widest text-gray-500">Clientes Satisfeitos</span>
+            </div>
+            <div>
+              <span class="block text-primary text-3xl font-bold">1k+</span>
+              <span class="text-xs uppercase tracking-widest text-gray-500">Saloes Parceiros</span>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Seção de Carrinho -->
-        <div id="cart">
-          <h2>&#128722;Carrinho</h2>
-          <ul id="cart-items">
-            <!-- Itens do carrinho serão adicionados aqui -->
+  <div id="cartNotification">
+    <p>Produto adicionado ao carrinho!</p>
+  </div>
+
+  <div id="cart-panel" class="cart-panel">
+    <div class="cart-shell">
+      <div class="cart-head">
+        <div class="cart-head-title">
+          <span class="material-icons text-primary">receipt_long</span>
+          <h3>Resumo do Pedido</h3>
+        </div>
+        <button id="cart-close" class="cart-close" type="button">Fechar</button>
+      </div>
+      <div class="cart-body">
+        <div class="cart-intro">
+          <p class="cart-step">Finalizacao</p>
+          <h2>Quase la! Revise seu pedido profissional.</h2>
+          <p>Para garantir o melhor suporte tecnico e condicoes exclusivas para o seu salao, finalizamos pelo WhatsApp.</p>
+        </div>
+        <div id="cart" class="cart-content">
+          <div class="cart-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Qtd</th>
+                  <th class="text-right">Preco</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2">
+                    <span>Total estimado</span>
+                  </td>
+                  <td class="text-right">
+                    <span id="cart-total">R$ 0,00</span>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="cart-form">
+          <div class="cart-form-row">
+            <div class="cart-field">
+              <label for="cart-customer-name">Nome</label>
+              <input id="cart-customer-name" class="cart-input" type="text" placeholder="Seu nome" />
+            </div>
+            <div class="cart-field">
+              <label for="cart-customer-cep">CEP</label>
+              <input id="cart-customer-cep" class="cart-input" type="text" inputmode="numeric" placeholder="Ex: 06333-000" />
+            </div>
+          </div>
+          <div class="cart-form-row">
+            <div class="cart-field">
+              <label for="cart-customer-street">Endereco</label>
+              <input id="cart-customer-street" class="cart-input" type="text" placeholder="Rua, avenida, etc." />
+            </div>
+            <div class="cart-field">
+              <label for="cart-customer-number">Numero</label>
+              <input id="cart-customer-number" class="cart-input" type="text" placeholder="Numero" />
+            </div>
+          </div>
+          <div class="cart-form-row">
+            <div class="cart-field">
+              <label for="cart-customer-neighborhood">Bairro</label>
+              <input id="cart-customer-neighborhood" class="cart-input" type="text" placeholder="Bairro" />
+            </div>
+            <div class="cart-field">
+              <label for="cart-customer-city">Cidade/UF</label>
+              <input id="cart-customer-city" class="cart-input" type="text" placeholder="Ex: Carapicuiba - SP" />
+            </div>
+          </div>
+          <div class="cart-form-row">
+            <div class="cart-field">
+              <label for="cart-payment-method">Forma de pagamento</label>
+              <select id="cart-payment-method" class="cart-input">
+                <option value="">Selecione</option>
+                <option value="Pix">Pix</option>
+                <option value="Cartao">Cartao</option>
+                <option value="Boleto">Boleto</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="A combinar">A combinar</option>
+              </select>
+            </div>
+            <div class="cart-field">
+              <label for="cart-delivery-method">Entrega</label>
+              <select id="cart-delivery-method" class="cart-input">
+                <option value="">Selecione</option>
+                <option value="Entrega">Entrega</option>
+                <option value="Retirada">Retirada</option>
+              </select>
+            </div>
+            <div class="cart-field full">
+              <label for="cart-notes">Observacoes</label>
+              <textarea id="cart-notes" class="cart-input cart-textarea" rows="3" placeholder="Ex: preferencia de horario, retirada, etc."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="cart-actions">
+          <button class="cart-checkout" type="button" onclick="finalizePurchase()">Finalizar pedido pelo WhatsApp</button>
+          <div class="cart-badges">
+            <span>Ambiente Seguro</span>
+            <span>Linha Profissional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product-modal" class="product-modal" aria-hidden="true">
+    <div class="product-modal-card" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+      <button id="product-modal-close" class="product-modal-close" type="button">Fechar</button>
+      <div class="product-modal-body">
+        <div class="product-modal-gallery">
+          <div class="product-modal-main">
+            <img id="product-modal-image" alt="Produto" />
+          </div>
+          <div id="product-modal-thumbs" class="product-modal-thumbs"></div>
+        </div>
+        <div class="product-modal-info">
+          <span id="product-modal-category" class="product-modal-category"></span>
+          <h3 id="product-modal-title"></h3>
+          <p id="product-modal-description"></p>
+          <div class="product-modal-price">
+            <span id="product-modal-price" class="product-modal-price-current"></span>
+            <span id="product-modal-price-original" class="product-modal-price-original hidden"></span>
+            <span id="product-modal-discount" class="product-modal-discount hidden"></span>
+          </div>
+          <p id="product-modal-stock" class="stock-label"></p>
+          <div class="product-modal-actions">
+            <button id="product-modal-add" class="admin-primary-btn" type="button">Adicionar ao carrinho</button>
+            <button id="product-modal-whatsapp" class="cart-checkout" type="button">Comprar pelo WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-panel" class="admin-panel">
+    <div class="admin-shell">
+      <button id="admin-close" class="admin-close" type="button">Fechar</button>
+      <div id="admin-login" class="admin-login">
+        <div class="admin-login-card">
+          <div class="admin-login-brand">
+            <img src="assets/logo-marca.jpg" alt="Mitico Profissional Logo" />
+            <div class="admin-login-brand-text">
+              <span class="admin-login-brand-title">Mitico Profissional</span>
+              <span class="admin-login-brand-sub">Alta Performance Cosmetica</span>
+            </div>
+          </div>
+          <h2>Acesso Administrativo</h2>
+          <p class="admin-login-subtitle">Login exclusivo para equipe Mitico.</p>
+          <div class="admin-login-form">
+            <label for="admin-user">Email</label>
+            <input id="admin-user" class="admin-input" type="email" autocomplete="username" />
+            <label for="admin-pass">Senha</label>
+            <input id="admin-pass" class="admin-input" type="password" autocomplete="current-password" />
+            <button id="admin-login-btn" class="admin-primary-btn" type="button">Entrar</button>
+          </div>
+        </div>
+      </div>
+      <div id="admin-actions" class="admin-actions hidden">
+        <div class="admin-actions-card">
+          <div class="admin-actions-top">
+            <div class="admin-actions-title">
+              <img src="assets/logo-marca.jpg" alt="Mitico Profissional Logo" />
+              <div>
+                <span class="admin-actions-eyebrow">Produtos</span>
+                <h3>Catalogo Profissional</h3>
+              </div>
+            </div>
+            <button id="admin-logout" class="admin-outline-btn" type="button">Sair</button>
+          </div>
+          <div class="admin-dashboard">
+            <div class="admin-dashboard-header">
+              <div>
+                <span class="admin-actions-eyebrow">Dashboard</span>
+                <h3>Resumo da Loja</h3>
+              </div>
+              <div class="admin-dashboard-actions">
+                <select id="analytics-range" class="admin-input">
+                  <option value="7">Ultimos 7 dias</option>
+                  <option value="30" selected>Ultimos 30 dias</option>
+                  <option value="0">Total</option>
+                </select>
+                <span id="analytics-updated" class="admin-dashboard-updated"></span>
+              </div>
+            </div>
+            <div class="admin-stats-grid">
+              <div class="admin-stat-card">
+                <span>Visitantes unicos</span>
+                <strong id="metric-unique">0</strong>
+              </div>
+              <div class="admin-stat-card">
+                <span>Visualizacoes de pagina</span>
+                <strong id="metric-views">0</strong>
+              </div>
+              <div class="admin-stat-card">
+                <span>Total de produtos</span>
+                <strong id="metric-products">0</strong>
+              </div>
+              <div class="admin-stat-card">
+                <span>Unidades em estoque</span>
+                <strong id="metric-instock">0</strong>
+              </div>
+              <div class="admin-stat-card">
+                <span>Sem estoque</span>
+                <strong id="metric-outstock">0</strong>
+              </div>
+              <div class="admin-stat-card">
+                <span>Categorias ativas</span>
+                <strong id="metric-categories">0</strong>
+              </div>
+            </div>
+            <div class="admin-analytics-grid">
+              <div class="admin-analytics-card">
+                <h4>Produtos mais visitados</h4>
+                <ol id="analytics-top-views" class="admin-analytics-list"></ol>
+              </div>
+              <div class="admin-analytics-card">
+                <h4>Mais adicionados ao carrinho</h4>
+                <ol id="analytics-top-cart" class="admin-analytics-list"></ol>
+              </div>
+              <div class="admin-analytics-card">
+                <h4>Geolocalizacao de clientes</h4>
+                <div id="analytics-geo" class="admin-geo-list"></div>
+                <p class="admin-note">Dados do Google Analytics (GA4).</p>
+              </div>
+            </div>
+            <div class="admin-charts-grid">
+              <div class="admin-chart-card">
+                <h4>Visitas por dia</h4>
+                <canvas id="chart-views" height="160"></canvas>
+              </div>
+              <div class="admin-chart-card">
+                <h4>Produto clicado por dia</h4>
+                <canvas id="chart-product-views" height="160"></canvas>
+              </div>
+              <div class="admin-chart-card">
+                <h4>Adicionados ao carrinho</h4>
+                <canvas id="chart-cart" height="160"></canvas>
+              </div>
+            </div>
+          </div>
+          <form id="product-form" class="admin-form">
+            <input id="product-id" type="hidden" />
+            <div class="admin-form-grid">
+              <div class="admin-field">
+                <label for="product-name">Nome</label>
+                <input id="product-name" class="admin-input" type="text" required />
+              </div>
+              <div class="admin-field">
+                <label for="product-price">Preco</label>
+                <input id="product-price" class="admin-input" type="text" required />
+              </div>
+              <div class="admin-field">
+                <label for="product-category">Categoria</label>
+                <select id="product-category" class="admin-input" required></select>
+              </div>
+              <div class="admin-field">
+                <label for="product-discount">Desconto (%)</label>
+                <input id="product-discount" class="admin-input" type="number" min="0" max="100" step="0.01" placeholder="0" />
+              </div>
+              <div class="admin-field">
+                <label for="product-stock">Estoque (unidades)</label>
+                <input id="product-stock" class="admin-input" type="number" min="0" step="1" placeholder="0" />
+              </div>
+            </div>
+            <div class="admin-field">
+              <label for="product-image-file">Imagem (arquivo)</label>
+              <input id="product-image-file" class="admin-file" type="file" accept="image/*" />
+              <div id="product-image-preview" class="admin-image-preview">Sem imagem selecionada.</div>
+              <p class="admin-note">Padrao recomendado: imagem quase quadrada, ate 1600px e 1.5MB.</p>
+            </div>
+            <div class="admin-field">
+              <label for="product-image-files-extra">Imagens extras (ate 4)</label>
+              <input id="product-image-files-extra" class="admin-file" type="file" accept="image/*" multiple />
+              <div id="product-images-preview" class="admin-image-preview-grid">Sem imagens extras.</div>
+              <p class="admin-note">Use ate 4 imagens extras seguindo o mesmo padrao de tamanho.</p>
+            </div>
+            <div class="admin-field">
+              <label for="product-description">Descricao</label>
+              <textarea id="product-description" class="admin-textarea" rows="4"></textarea>
+            </div>
+            <div class="admin-form-actions">
+              <button id="product-save" class="admin-primary-btn" type="submit">Salvar</button>
+              <button id="product-cancel" class="admin-outline-btn" type="button">Cancelar</button>
+            </div>
+          </form>
+          <div class="admin-list">
+            <div class="admin-list-header">
+              <h4>Produtos cadastrados</h4>
+            </div>
+            <div class="admin-list-controls">
+              <input id="admin-search" class="admin-input" type="text" placeholder="Buscar produto..." />
+              <select id="admin-category-filter" class="admin-input">
+                <option value="">Todas as categorias</option>
+              </select>
+            </div>
+            <div id="admin-product-list" class="admin-product-list"></div>
+            <div id="admin-pagination" class="admin-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-background-light dark:bg-background-dark pt-24 pb-12 border-t border-white/5" id="contato">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div>
+          <img alt="Mitico Logo" class="h-12 w-auto mb-6" src="assets/logo-txt.png" />
+          <p class="text-gray-400 mb-6">Elevando o padrao da beleza profissional com tecnologia e sofisticacao.</p>
+          <div class="flex space-x-4">
+            <a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:text-black transition-all" href="https://www.facebook.com/impactto.impacto" target="_blank" rel="noopener">
+              <i class="material-icons text-sm">facebook</i>
+            </a>
+            <a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:text-black transition-all" href="https://www.instagram.com/mitico_profissional?igsh=MXY3eTRib3MxcGtu" target="_blank" rel="noopener">
+              <i class="material-icons text-sm">camera_alt</i>
+            </a>
+            <a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:text-black transition-all" href="https://wa.me/5511970618002" target="_blank" rel="noopener">
+              <i class="material-icons text-sm">chat</i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Links Uteis</h4>
+          <ul class="space-y-4">
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="#produtos">Linha Profissional</a></li>
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="#historia">Nossa Historia</a></li>
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="#contato">Contato</a></li>
           </ul>
-          <p><strong>Total:</strong> <span id="cart-total">R$ 0,00</span></p>
-          <button onclick="finalizePurchase()">Finalizar Compra</button>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Suporte</h4>
+          <ul class="space-y-4">
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="#produtos">Catalogo</a></li>
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="mailto:miticoprofissional@gmail.com">Email</a></li>
+            <li><a class="text-gray-400 hover:text-primary transition-colors" href="https://wa.me/5511970618002" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Contato</h4>
+          <ul class="space-y-4 text-gray-400">
+            <li class="flex items-start gap-3">
+              <span class="material-icons text-primary text-sm mt-1">location_on</span>
+              <span>R. Vital Brasil, 148 - Jardim Tupa, Barueri - SP, 06435-250</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-icons text-primary text-sm">phone</span>
+              <span>(11) 97061-8002</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-icons text-primary text-sm">phone</span>
+              <span>(11) 94784-0592</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-icons text-primary text-sm">mail</span>
+              <span>miticoprofissional@gmail.com</span>
+            </li>
+            <li class="pt-4">
+              <a class="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:brightness-110 transition-all w-full justify-center" href="https://wa.me/5511970618002" target="_blank" rel="noopener">
+                <span class="material-icons">chat</span>
+                WhatsApp Oficial
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-    </section>
-
-
-  </main>
-
-  <footer id="contato" class="footer">
-    <div class="footer-container">
-      <!-- Logo e Descrição -->
-      <div class="footer-section">
-        <img src="assets/logo-txt.png" alt="Logo da Loja" class="footer-logo">
-        <p class="footer-description">
-          Sua loja de cosméticos de confiança, trazendo os melhores produtos para realçar sua beleza natural.
-        </p>
-      </div>
-
-      <!-- Links Rápidos -->
-      <div class="footer-section">
-        <h3 class="footer-heading">Links Rápidos</h3>
-        <ul class="footer-links">
-          <li><a href="#sobre">Sobre Nós</a></li>
-          <li><a href="#produtos">Produtos</a></li>
-          <li><a href="/contato">Contato</a></li>
-        </ul>
-      </div>
-
-      <!-- Contato -->
-      <div class="footer-section">
-        <h3 class="footer-heading">Contato</h3>
-        <p class="footer-contact">📍 R. Vital Brasil, 148 - Jardim Tupa, Barueri - SP,06435-250</p>
-        <p class="footer-contact"><a href="tel:+5511970618002">📞 (11) 970618002</a></p>
-        <p class="footer-contact"><a href="tel:+5511947840592">📞 (11) 947840592</a></p>
-        <p class="footer-contact">📧 miticoprofissional@gmail.com</p>
-      </div>
-
-      <!-- Redes Sociais -->
-      <div class="footer-section">
-        <h3 class="footer-heading">Siga-nos</h3>
-        <div class="footer-socials">
-          <a href="https://www.facebook.com/impactto.impacto" target="_blank" class="social-icon"><i
-              class="fab fa-facebook"></i></a>
-          <a href="https://www.instagram.com/mitico_profissional?igsh=MXY3eTRib3MxcGtu" target="_blank"
-            class="social-icon"><i class="fab fa-instagram"></i></a>
+      <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-sm">© 2026 Mitico Profissional. Todos os direitos reservados.</p>
+        <div class="flex items-center gap-4 grayscale opacity-50">
+          <span class="material-icons">payments</span>
+          <span class="material-icons">credit_card</span>
+          <span class="material-icons">lock</span>
         </div>
       </div>
-    </div>
-
-    <!-- Direitos Autorais -->
-    <div class="footer-bottom">
-      <p>© 2025 Loja de Cosméticos. Todos os direitos reservados.</p>
     </div>
   </footer>
 
+  <button class="fixed bottom-6 right-6 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-black shadow-lg z-50 hover:scale-110 transition-transform" onclick="document.documentElement.classList.toggle('dark')" type="button">
+    <span class="material-icons">contrast</span>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="script.js"></script>
-
 </body>
-
 </html>
