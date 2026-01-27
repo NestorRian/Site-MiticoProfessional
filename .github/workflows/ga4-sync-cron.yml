@@ -1,0 +1,17 @@
+name: GA4 Sync (hourly)
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly (UTC)
+  workflow_dispatch:
+
+jobs:
+  ga4-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Supabase Edge Function
+        run: |
+          curl -sS -X POST \
+            -H "Content-Type: application/json" \
+            -H "x-cron-key: ${{ secrets.GA4_CRON_SECRET }}" \
+            "${{ secrets.GA4_SYNC_URL }}"
