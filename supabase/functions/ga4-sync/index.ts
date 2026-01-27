@@ -182,22 +182,32 @@ async function fetchGa4Reports(accessToken: string, startDate: string, endDate: 
             limit: 5,
         },
     ];
+    const chunks: typeof requests[] = [requests.slice(0, 5), requests.slice(5)];
+    const reports: unknown[] = [];
 
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ requests }),
-    });
+    for (const chunk of chunks) {
+        if (chunk.length === 0) continue;
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ requests: chunk }),
+        });
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`GA4 runReport falhou: ${errorText}`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`GA4 runReport falhou: ${errorText}`);
+        }
+
+        const data = await response.json();
+        if (Array.isArray(data?.reports)) {
+            reports.push(...data.reports);
+        }
     }
 
-    return await response.json();
+    return { reports };
 }
 
 serve(async (req: Request) => {
