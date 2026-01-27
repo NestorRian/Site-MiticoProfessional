@@ -41,6 +41,12 @@ create table if not exists public.analytics_events (
   created_at timestamptz default now()
 );
 
+create table if not exists public.ga4_dashboard_cache (
+  id text primary key,
+  payload jsonb not null,
+  updated_at timestamptz default now()
+);
+
 alter table public.products
 add column if not exists discount_percent numeric(5,2) default 0;
 
@@ -86,6 +92,7 @@ for each row execute function public.set_updated_at();
 alter table public.products enable row level security;
 
 alter table public.analytics_events enable row level security;
+alter table public.ga4_dashboard_cache enable row level security;
 
 drop policy if exists "Public read" on public.products;
 drop policy if exists "Admin insert" on public.products;
@@ -93,6 +100,7 @@ drop policy if exists "Admin update" on public.products;
 drop policy if exists "Admin delete" on public.products;
 drop policy if exists "Analytics insert" on public.analytics_events;
 drop policy if exists "Admin read analytics" on public.analytics_events;
+drop policy if exists "Admin read ga4 cache" on public.ga4_dashboard_cache;
 
 create policy "Public read"
 on public.products
@@ -121,6 +129,11 @@ with check (true);
 
 create policy "Admin read analytics"
 on public.analytics_events
+for select
+using (lower(auth.jwt()->>'email') = 'miticoprofissional@gmail.com');
+
+create policy "Admin read ga4 cache"
+on public.ga4_dashboard_cache
 for select
 using (lower(auth.jwt()->>'email') = 'miticoprofissional@gmail.com');
 
@@ -215,13 +228,24 @@ supabase secrets set \
   GA4_PROPERTY_ID="SEU_PROPERTY_ID" \
   GA4_CLIENT_EMAIL="SEU_CLIENT_EMAIL" \
   GA4_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nSUA_CHAVE\n-----END PRIVATE KEY-----" \
-  ADMIN_EMAIL="miticoprofissional@gmail.com"
+  ADMIN_EMAIL="miticoprofissional@gmail.com" \
+  GA4_CRON_SECRET="UMA_CHAVE_SECRETA"
 ```
 
 4) Publicar a function:
 ```bash
 supabase functions deploy ga4-dashboard
+supabase functions deploy ga4-sync
 ```
 
 Pronto. O dashboard vai buscar os dados reais do GA4.
+
+## 8) Agendar atualizacao automatica (1h)
+No Supabase: **Edge Functions > Scheduled Functions > Create**.
+- Function: `ga4-sync`
+- Cron: `0 * * * *` (a cada 1 hora)
+- Method: `POST`
+- Header: `x-cron-key` com o valor de `GA4_CRON_SECRET`
+
+Isso atualiza a tabela `ga4_dashboard_cache` automaticamente, mesmo sem admin logado.
 

@@ -6,17 +6,17 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 import { create, getNumericDate } from "https://deno.land/x/djwt@v2.9/mod.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
-const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") || "";
-const ADMIN_EMAIL = Deno.env.get("ADMIN_EMAIL") || "";
-const GA4_CACHE_TABLE = "ga4_dashboard_cache";
-
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const GA4_PROPERTY_ID = Deno.env.get("GA4_PROPERTY_ID") || "";
 const GA4_CLIENT_EMAIL = Deno.env.get("GA4_CLIENT_EMAIL") || "";
 const GA4_PRIVATE_KEY = (Deno.env.get("GA4_PRIVATE_KEY") || "").replace(/\\n/g, "\n");
+const GA4_CRON_SECRET = Deno.env.get("GA4_CRON_SECRET") || "";
+
+const GA4_CACHE_TABLE = "ga4_dashboard_cache";
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-cron-key",
 };
 
 function jsonResponse(body: unknown, status = 200) {
@@ -209,28 +209,16 @@ serve(async (req: Request) => {
         return errorResponse("Metodo nao permitido.", 405);
     }
 
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    if (!GA4_CRON_SECRET || req.headers.get("x-cron-key") !== GA4_CRON_SECRET) {
+        return errorResponse("Nao autorizado.", 401);
+    }
+
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
         return errorResponse("Supabase nao configurado.", 500);
     }
 
     if (!GA4_PROPERTY_ID) {
         return errorResponse("GA4_PROPERTY_ID nao configurado.", 500);
-    }
-
-    const authHeader = req.headers.get("Authorization") || "";
-    const token = authHeader.replace("Bearer ", "").trim();
-    if (!token) {
-        return errorResponse("Nao autorizado.", 401);
-    }
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const { data, error } = await supabase.auth.getUser(token);
-    if (error || !data?.user) {
-        return errorResponse("Sessao invalida.", 401);
-    }
-
-    if (ADMIN_EMAIL && data.user.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-        return errorResponse("Sem permissao.", 403);
     }
 
     let days = 30;
@@ -247,20 +235,6 @@ serve(async (req: Request) => {
     const endDate = new Date();
     const startDate = new Date();
     startDate.setDate(endDate.getDate() - (days - 1));
-
-    // Try cached payload first
-    const { data: cacheData } = await supabase
-        .from(GA4_CACHE_TABLE)
-        .select("payload, updated_at")
-        .eq("id", "latest")
-        .maybeSingle();
-
-    if (cacheData && cacheData.payload) {
-        return jsonResponse({
-            ...cacheData.payload,
-            cachedAt: cacheData.updated_at,
-        });
-    }
 
     try {
         const accessToken = await getAccessToken();
@@ -323,9 +297,18 @@ serve(async (req: Request) => {
             fetchedAt: new Date().toISOString(),
         };
 
-        return jsonResponse(payload);
+        const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+        const { error } = await supabase
+            .from(GA4_CACHE_TABLE)
+            .upsert({ id: "latest", payload, updated_at: new Date().toISOString() });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return jsonResponse({ ok: true, updated_at: new Date().toISOString() });
     } catch (error) {
-        console.error("Erro GA4:", error);
-        return errorResponse("Erro ao carregar GA4.", 500);
+        console.error("Erro GA4 sync:", error);
+        return errorResponse("Erro ao sincronizar GA4.", 500);
     }
 });
