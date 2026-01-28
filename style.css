@@ -1250,6 +1250,21 @@
   flex-wrap: wrap;
 }
 
+.admin-image-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-remove-btn {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.admin-remove-btn:hover {
+  border-color: rgba(212, 76, 76, 0.7);
+  color: #f5b5b5;
+}
+
 .admin-list {
   display: grid;
   gap: 12px;
@@ -1375,6 +1390,7 @@
 }
 
 .admin-image-thumb {
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1386,6 +1402,27 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.admin-thumb-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: rgba(10, 10, 10, 0.7);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-thumb-remove:hover {
+  border-color: rgba(212, 76, 76, 0.8);
+  color: #f5b5b5;
 }
 
 .admin-file {

@@ -107,6 +107,8 @@ const analyticsGeo = document.getElementById("analytics-geo");
 const chartViewsCanvas = document.getElementById("chart-views");
 const chartProductViewsCanvas = document.getElementById("chart-product-views");
 const chartCartCanvas = document.getElementById("chart-cart");
+const productImageRemoveBtn = document.getElementById("product-image-remove");
+const productImagesClearBtn = document.getElementById("product-images-clear");
 const ANALYTICS_TABLE = "analytics_events";
 let cachedVisitorHash = null;
 let visitorHashPromise = null;
@@ -115,6 +117,7 @@ let chartProductViewsInstance = null;
 let chartCartInstance = null;
 let pendingMainImageFile = null;
 let pendingExtraImageFiles = [];
+let pendingExtraImagePreviews = [];
 
 function formatPrice(value) {
     const numericValue = Number(value) || 0;
@@ -1554,6 +1557,7 @@ function resetProductForm() {
     currentImageUrlsExtra = [];
     pendingMainImageFile = null;
     pendingExtraImageFiles = [];
+    pendingExtraImagePreviews = [];
     clearImageInputs();
 }
 
@@ -1588,15 +1592,23 @@ function renderExtraPreviews(urls) {
         return;
     }
 
-    urls.forEach(function (url) {
+    urls.forEach(function (item) {
         const wrapper = document.createElement("div");
         wrapper.className = "admin-image-thumb";
 
         const img = document.createElement("img");
-        img.src = url;
+        img.src = item.src || "";
         img.alt = "Imagem extra";
 
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "admin-thumb-remove";
+        removeBtn.textContent = "Remover";
+        removeBtn.dataset.source = item.source;
+        removeBtn.dataset.index = String(item.index);
+
         wrapper.appendChild(img);
+        wrapper.appendChild(removeBtn);
         productImagesPreview.appendChild(wrapper);
     });
 }
@@ -1609,9 +1621,25 @@ function clearImageInputs() {
     if (productImagesExtraInput) {
         productImagesExtraInput.value = "";
     }
-    renderExtraPreviews([]);
+    pendingExtraImagePreviews = [];
+    updateExtraPreviews();
     pendingMainImageFile = null;
     pendingExtraImageFiles = [];
+}
+
+function buildExtraPreviewItems() {
+    const items = [];
+    currentImageUrlsExtra.forEach(function (url, index) {
+        items.push({ src: url, source: "existing", index: index });
+    });
+    pendingExtraImagePreviews.forEach(function (preview, index) {
+        items.push({ src: preview.src, source: "pending", index: index });
+    });
+    return items;
+}
+
+function updateExtraPreviews() {
+    renderExtraPreviews(buildExtraPreviewItems());
 }
 
 function sanitizeFileName(name) {
@@ -2227,30 +2255,34 @@ if (productImagesExtraInput) {
             alert("Selecione no maximo 4 imagens extras.");
             productImagesExtraInput.value = "";
             pendingExtraImageFiles = [];
-            renderExtraPreviews(currentImageUrlsExtra);
+            pendingExtraImagePreviews = [];
+            updateExtraPreviews();
             return;
         }
 
         if (!files.length) {
             pendingExtraImageFiles = [];
-            renderExtraPreviews(currentImageUrlsExtra);
+            pendingExtraImagePreviews = [];
+            updateExtraPreviews();
             return;
         }
 
         if (maxExtras === 0) {
             alert("Limite de imagens extras ja atingido.");
             productImagesExtraInput.value = "";
-            renderExtraPreviews(currentImageUrlsExtra);
+            updateExtraPreviews();
             return;
         }
 
         const existingFiles = pendingExtraImageFiles.slice();
+        const existingPreviews = pendingExtraImagePreviews.slice();
         const existingKeys = new Set(
             existingFiles.map(function (file) {
                 return getFileKey(file);
             })
         );
         const validFiles = existingFiles.slice();
+        const newFiles = [];
         const errors = [];
 
         for (const file of files) {
@@ -2259,7 +2291,11 @@ if (productImagesExtraInput) {
             }
             const validation = await validateImageFile(file);
             if (validation.ok) {
-                validFiles.push(file);
+                if (validFiles.length + newFiles.length >= maxExtras) {
+                    errors.push(`${file.name}: limite de imagens extras atingido.`);
+                } else {
+                    newFiles.push(file);
+                }
             } else {
                 errors.push(`${file.name}: ${validation.error}`);
             }
@@ -2269,15 +2305,16 @@ if (productImagesExtraInput) {
             alert(errors.join("\n"));
         }
 
-        pendingExtraImageFiles = validFiles.slice(0, maxExtras);
+        pendingExtraImageFiles = validFiles.concat(newFiles).slice(0, maxExtras);
 
         if (!pendingExtraImageFiles.length) {
             productImagesExtraInput.value = "";
-            renderExtraPreviews(currentImageUrlsExtra);
+            pendingExtraImagePreviews = existingPreviews.slice(0, maxExtras);
+            updateExtraPreviews();
             return;
         }
 
-        const readers = pendingExtraImageFiles.map(function (file) {
+        const readers = newFiles.map(function (file) {
             return new Promise(function (resolve) {
                 const reader = new FileReader();
                 reader.onload = function (event) {
@@ -2288,10 +2325,64 @@ if (productImagesExtraInput) {
         });
 
         const results = await Promise.all(readers);
-        const previews = results.filter(Boolean);
-        const mergedPreviews = currentImageUrlsExtra.concat(previews).slice(0, 4);
-        renderExtraPreviews(mergedPreviews);
+        const previews = results
+            .filter(Boolean)
+            .map(function (src, index) {
+                return { src: src, key: getFileKey(newFiles[index]) };
+            });
+        pendingExtraImagePreviews = existingPreviews.concat(previews).slice(0, maxExtras);
+        updateExtraPreviews();
         productImagesExtraInput.value = "";
+    });
+}
+
+if (productImageRemoveBtn) {
+    productImageRemoveBtn.addEventListener("click", function () {
+        pendingMainImageFile = null;
+        if (productImageFileInput) {
+            productImageFileInput.value = "";
+        }
+        if (currentImageUrl) {
+            const confirmed = window.confirm("Remover imagem atual? Voce precisara escolher outra antes de salvar.");
+            if (confirmed) {
+                currentImageUrl = "";
+            }
+        }
+        setImagePreview(currentImageUrl, productImagePreview);
+    });
+}
+
+if (productImagesClearBtn) {
+    productImagesClearBtn.addEventListener("click", function () {
+        currentImageUrlsExtra = [];
+        pendingExtraImageFiles = [];
+        pendingExtraImagePreviews = [];
+        if (productImagesExtraInput) {
+            productImagesExtraInput.value = "";
+        }
+        updateExtraPreviews();
+    });
+}
+
+if (productImagesPreview) {
+    productImagesPreview.addEventListener("click", function (event) {
+        const button = event.target.closest("button.admin-thumb-remove");
+        if (!button) {
+            return;
+        }
+        const source = button.dataset.source;
+        const index = parseInt(button.dataset.index || "-1", 10);
+        if (!Number.isFinite(index) || index < 0) {
+            return;
+        }
+
+        if (source === "existing") {
+            currentImageUrlsExtra.splice(index, 1);
+        } else if (source === "pending") {
+            pendingExtraImageFiles.splice(index, 1);
+            pendingExtraImagePreviews.splice(index, 1);
+        }
+        updateExtraPreviews();
     });
 }
 
@@ -2341,7 +2432,9 @@ if (adminProductList) {
             currentImageUrl = product.image_url || product.image || "";
             currentImageUrlsExtra = getExtraImages(product);
             setImagePreview(currentImageUrl, productImagePreview);
-            renderExtraPreviews(currentImageUrlsExtra);
+            pendingExtraImageFiles = [];
+            pendingExtraImagePreviews = [];
+            updateExtraPreviews();
 
             if (productForm) {
                 productForm.scrollIntoView({ behavior: "smooth", block: "start" });
