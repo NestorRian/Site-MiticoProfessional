@@ -45,6 +45,95 @@ if (cartPanel) {
     });
 }
 
+const heroTitle = document.getElementById("hero-title");
+
+function prefersReducedMotion() {
+    return (
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+}
+
+function typeLine(element, text, speed) {
+    return new Promise(function (resolve) {
+        if (!element) {
+            resolve();
+            return;
+        }
+
+        const content = text || "";
+        if (!content.length) {
+            element.textContent = "";
+            resolve();
+            return;
+        }
+
+        let index = 0;
+
+        const step = function () {
+            index += 1;
+            element.textContent = content.slice(0, index);
+            if (index < content.length) {
+                window.setTimeout(step, speed);
+            } else {
+                resolve();
+            }
+        };
+
+        step();
+    });
+}
+
+function runHeroTyping() {
+    if (!heroTitle) {
+        return;
+    }
+
+    const lines = heroTitle.querySelectorAll("[data-text]");
+    if (!lines.length) {
+        return;
+    }
+
+    if (prefersReducedMotion()) {
+        lines.forEach(function (line) {
+            line.textContent = line.dataset.text || line.textContent || "";
+            line.classList.remove("is-typing");
+            line.classList.add("is-typed");
+        });
+        return;
+    }
+
+    const typingSpeed = 42;
+    const linePause = 280;
+
+    const run = async function () {
+        for (let index = 0; index < lines.length; index += 1) {
+            const line = lines[index];
+            const text = line.dataset.text || line.textContent || "";
+            line.textContent = "";
+            line.classList.add("is-typing");
+            await typeLine(line, text, typingSpeed);
+
+            const isLast = index === lines.length - 1;
+            if (isLast) {
+                await new Promise(function (resolve) {
+                    window.setTimeout(resolve, 700);
+                });
+            } else {
+                await new Promise(function (resolve) {
+                    window.setTimeout(resolve, linePause);
+                });
+            }
+            line.classList.remove("is-typing");
+            line.classList.add("is-typed");
+        }
+    };
+
+    run();
+}
+
+runHeroTyping();
+
 const cart = [];
 const cartItemsList = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
@@ -70,6 +159,7 @@ const PRODUCT_CATEGORIES = [
     "Hidratacao",
     "Finalizadores",
     "Reparadores",
+    "Produtos Masculinos",
 ];
 const PAGE_SIZE = 20;
 const IMAGE_MAX_BYTES = 1.5 * 1024 * 1024;
@@ -823,6 +913,7 @@ const productsContainer = document.getElementById("products");
 const categoryFilters = document.getElementById("category-filters");
 const paginationContainer = document.getElementById("pagination");
 let products = [];
+let productRevealObserver = null;
 
 function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, function (match) {
@@ -930,6 +1021,48 @@ function getProductsFromDom() {
         });
 }
 
+function setupProductReveal() {
+    if (!productsContainer) {
+        return;
+    }
+
+    const cards = Array.from(productsContainer.querySelectorAll(".product-card"));
+    if (productRevealObserver) {
+        productRevealObserver.disconnect();
+    }
+
+    if (!cards.length) {
+        return;
+    }
+
+    if (prefersReducedMotion()) {
+        cards.forEach(function (card) {
+            card.classList.add("is-visible");
+            card.style.setProperty("--reveal-delay", "0ms");
+        });
+        return;
+    }
+
+    productRevealObserver = new IntersectionObserver(
+        function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.18, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    cards.forEach(function (card, index) {
+        const delay = Math.min(index * 70, 280);
+        card.classList.remove("is-visible");
+        card.style.setProperty("--reveal-delay", `${delay}ms`);
+        productRevealObserver.observe(card);
+    });
+}
+
 function renderProducts(list) {
     if (!productsContainer) {
         return;
@@ -937,6 +1070,9 @@ function renderProducts(list) {
 
     if (!list.length) {
         productsContainer.innerHTML = "<p>Sem produtos cadastrados.</p>";
+        if (productRevealObserver) {
+            productRevealObserver.disconnect();
+        }
         return;
     }
 
@@ -1013,6 +1149,8 @@ function renderProducts(list) {
         `;
         })
         .join("");
+
+    setupProductReveal();
 }
 
 function openProductModal(product) {
@@ -1827,7 +1965,7 @@ function renderAdminPagination(totalPages) {
 }
 
 async function updateDashboard() {
-    if (!metricUnique || !metricViews || !metricProducts) {
+    if (!metricProducts || !metricInStock || !metricOutStock || !metricCategories) {
         return;
     }
 
@@ -1851,6 +1989,12 @@ async function updateDashboard() {
     metricOutStock.textContent = String(outStockCount);
     metricCategories.textContent = String(categoryCount);
 
+    const setText = function (element, value) {
+        if (element) {
+            element.textContent = value;
+        }
+    };
+
     const renderList = function (container, items, emptyLabel) {
         if (!container) {
             return;
@@ -1870,9 +2014,27 @@ async function updateDashboard() {
         });
     };
 
+    const hasGaTargets = Boolean(
+        metricUnique ||
+            metricViews ||
+            analyticsTopViews ||
+            analyticsTopCart ||
+            analyticsGeo ||
+            chartViewsCanvas ||
+            chartProductViewsCanvas ||
+            chartCartCanvas
+    );
+
+    if (!hasGaTargets) {
+        if (analyticsUpdated) {
+            analyticsUpdated.textContent = "";
+        }
+        return;
+    }
+
     if (!supabaseReady || !isAdminLoggedIn()) {
-        metricUnique.textContent = "0";
-        metricViews.textContent = "0";
+        setText(metricUnique, "0");
+        setText(metricViews, "0");
         renderList(analyticsTopViews, [], "Sem cliques ainda.");
         renderList(analyticsTopCart, [], "Sem adicionados ainda.");
         if (analyticsGeo) {
@@ -1886,8 +2048,8 @@ async function updateDashboard() {
     const gaData = await fetchGa4Dashboard(days);
 
     if (!gaData || !gaData.summary) {
-        metricUnique.textContent = "0";
-        metricViews.textContent = "0";
+        setText(metricUnique, "0");
+        setText(metricViews, "0");
         renderList(analyticsTopViews, [], "Sem cliques ainda.");
         renderList(analyticsTopCart, [], "Sem adicionados ainda.");
         if (analyticsGeo) {
@@ -1896,8 +2058,8 @@ async function updateDashboard() {
         return;
     }
 
-    metricUnique.textContent = String(gaData.summary.activeUsers || 0);
-    metricViews.textContent = String(gaData.summary.screenPageViews || 0);
+    setText(metricUnique, String(gaData.summary.activeUsers || 0));
+    setText(metricViews, String(gaData.summary.screenPageViews || 0));
 
     renderList(analyticsTopViews, gaData.topViews || [], "Sem cliques ainda.");
     renderList(analyticsTopCart, gaData.topCart || [], "Sem adicionados ainda.");

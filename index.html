@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Mítico Profissional | Alta Performance em Cosméticos</title>
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X75B51JE38"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -80,9 +83,9 @@
       <img alt="Cosméticos Mítico" class="w-full h-full object-cover opacity-30" src="assets/img-secao-sobre.jpg" loading="eager" decoding="async" />
     </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
-      <h1 class="font-display text-4xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight">
-        Cosméticos profissionais de <br />
-        <span class="gold-text-gradient">alta performance</span>
+      <h1 class="font-display text-4xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight hero-title" id="hero-title" aria-label="Cosméticos profissionais de alta performance">
+        <span class="type-line" data-text="Cosméticos profissionais de">Cosméticos profissionais de</span><br />
+        <span class="gold-text-gradient type-line" data-text="alta performance">alta performance</span>
       </h1>
       <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
         Tecnologia avançada para resultados extraordinários. A marca preferida dos maiores especialistas em beleza.
@@ -377,14 +380,6 @@
             </div>
             <div class="admin-stats-grid">
               <div class="admin-stat-card">
-                <span>Visitantes únicos</span>
-                <strong id="metric-unique">0</strong>
-              </div>
-              <div class="admin-stat-card">
-                <span>Visualizações de página</span>
-                <strong id="metric-views">0</strong>
-              </div>
-              <div class="admin-stat-card">
                 <span>Total de produtos</span>
                 <strong id="metric-products">0</strong>
               </div>
@@ -399,35 +394,6 @@
               <div class="admin-stat-card">
                 <span>Categorias ativas</span>
                 <strong id="metric-categories">0</strong>
-              </div>
-            </div>
-            <div class="admin-analytics-grid">
-              <div class="admin-analytics-card">
-                <h4>Produtos mais visitados</h4>
-                <ol id="analytics-top-views" class="admin-analytics-list"></ol>
-              </div>
-              <div class="admin-analytics-card">
-                <h4>Mais adicionados ao carrinho</h4>
-                <ol id="analytics-top-cart" class="admin-analytics-list"></ol>
-              </div>
-              <div class="admin-analytics-card">
-                <h4>Geolocalização de clientes</h4>
-                <div id="analytics-geo" class="admin-geo-list"></div>
-                <p class="admin-note">Dados do Google Analytics (GA4).</p>
-              </div>
-            </div>
-            <div class="admin-charts-grid">
-              <div class="admin-chart-card">
-                <h4>Visitas por dia</h4>
-                <canvas id="chart-views" height="160"></canvas>
-              </div>
-              <div class="admin-chart-card">
-                <h4>Produto clicado por dia</h4>
-                <canvas id="chart-product-views" height="160"></canvas>
-              </div>
-              <div class="admin-chart-card">
-                <h4>Adicionados ao carrinho</h4>
-                <canvas id="chart-cart" height="160"></canvas>
               </div>
             </div>
           </div>

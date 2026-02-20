@@ -16,6 +16,43 @@
   -webkit-text-fill-color: transparent;
 }
 
+html.js .hero-title .type-line {
+  visibility: hidden;
+}
+
+html.js .hero-title .type-line.is-typing,
+html.js .hero-title .type-line.is-typed {
+  visibility: visible;
+}
+
+.hero-title .type-line {
+  display: inline-block;
+  position: relative;
+  white-space: pre-wrap;
+  --caret-color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-title .gold-text-gradient {
+  --caret-color: #f1d592;
+}
+
+.hero-title .type-line.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  background: var(--caret-color);
+  vertical-align: -0.05em;
+  animation: caret-blink 0.9s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .border-gold {
   border: 1px solid rgba(197, 160, 89, 0.3);
 }
@@ -238,6 +275,24 @@
 
 .product-card {
   cursor: pointer;
+}
+
+html.js .product-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+html.js .product-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+html.js .product-card.is-visible.is-disabled {
+  opacity: 0.75;
 }
 
 .product-card.is-disabled img {
