@@ -152,6 +152,7 @@ const PRODUCT_CATEGORIES = [
     "Botox",
     "Selagem",
     "Tratamento",
+    "Clareamento",
     "Kits Capilares",
     "Shampoo",
     "Cronograma",
