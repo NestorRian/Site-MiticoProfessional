@@ -1137,7 +1137,7 @@ function renderProducts(list) {
             <div class="p-6 flex flex-col gap-3">
               <h3 class="text-white font-semibold text-lg">${safeName}</h3>
               ${categoryHtml}
-              <p class="text-gray-400 text-sm">${safeDesc}</p>
+              <p class="product-description text-gray-400 text-sm">${safeDesc}</p>
               <p class="${stockClass}">${stockLabel}</p>
               <div class="flex items-center justify-between mt-auto">
                 ${priceHtml}

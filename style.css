@@ -277,6 +277,10 @@ html.js .hero-title .type-line.is-typed {
   cursor: pointer;
 }
 
+.product-description {
+  display: none;
+}
+
 html.js .product-card {
   opacity: 0;
   transform: translateY(18px);
